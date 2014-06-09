@@ -1,0 +1,5 @@
+<div id="footer">
+      <div style="padding-top: 15px;" class="container">
+        <p class="text-muted-footer text-center">Aberystwyth Community Of Gamers - Aberystwyth University's top gaming society. | <a href="https://www.facebook.com/groups/aber.cog/"><img class="smallsocial" alt="Facebook icon" src="<?PHP echo $home . "/images/facebook.png"; ?>" /></a> <a href="https://twitter.com/AberCOG"><img class="smallsocial" alt="Twitter icon" src="<?PHP echo $home . "/images/twitter.png"; ?>" /></a> <a href="http://www.youtube.com/user/abercog"><img class="smallsocial" alt="YouTube icon" src="<?PHP echo $home . "/images/youtube.png"; ?>" /></a> <a href="http://www.twitch.tv/abercog"><img class="smallsocial" alt="Twitch icon" src="<?PHP echo $home . "/images/twitch.png"; ?>" /></a> <a href="http://steamcommunity.com/groups/AberCOG"><img class="smallsocial" alt="Steam icon" src="<?PHP echo $home . "/images/steam.png"; ?>" /></a> <a href="#"><span class="glyphicon glyphicon-arrow-up"></span></a></p>
+      </div>
+</div>

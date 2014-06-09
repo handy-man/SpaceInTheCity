@@ -1,0 +1,22 @@
+.panel{
+background-color: #428bca;
+}
+
+.panel-body{
+background-color: white;
+}
+
+.list-title{
+background-color: #428bca;
+color: white;
+}	
+
+a{
+color: white;
+}
+
+
+.btn-search{
+float: right;
+margin-top: -17px;
+}

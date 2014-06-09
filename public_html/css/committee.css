@@ -1,0 +1,30 @@
+.committee-image{
+	-moz-box-shadow: 0px 0px 7px #072002;
+	-webkit-box-shadow: 0px 0px 7px #072002;
+	box-shadow: 0px 0px 7px #072002;
+	height: 256px;
+	width: 236px;
+	display: block; 
+	margin-top: -256px;
+}
+
+.committee-splash{width: 320px; height: 300px; background:url(../images/splash.png) no-repeat top center; background-size:cover; display: block; margin-left: auto; margin-right: 215px;}
+
+
+@media all and (max-width: 600px) {
+    .committee-splash {
+        margin-left: 0px;
+    }
+	.committee-image{
+	margin-left: 36px;
+	}
+
+}
+
+
+.text-muted{
+color: #42a02d;
+}
+.text-muted-footer{
+color: #999999;
+}
