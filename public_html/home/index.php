@@ -26,18 +26,14 @@ user_only($home);
     <![endif]-->
   </head>
   <body>
-
-	
-    <!-- Fixed navbar repeated code because we need to change active page. -->
 	<div id="wrap">
         <?PHP
 		Navigation_home($home);
 	?>
-	<!--Copy all above this line into new pages, changing relevant details. (active page, title maybe? etc) -->
-    <div class="container label-container">
-
-	<span class="label label-custom label-primary">Primary</span>
-	
+    <div class="container" style="width: 400px;">
+	<a href="jobs.php">
+	<span class="label center-block label-primary" style="font-size: 35px;">Current Jobs  <span class="glyphicon glyphicon-exclamation-sign" style="font-size: 25px;"></span></span>
+	</a>
     </div> <!-- /container -->
 	
 	</div><!-- /wrap -->

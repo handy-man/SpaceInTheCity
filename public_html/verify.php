@@ -35,7 +35,6 @@ header('Location: ' . $home . '/');
 }
 else{
 $_SESSION['admin'] = $user_admin_status;
-$_SESSION['mod'] = $user_mod_status;
 $_SESSION['displayname'] = $user_displayname;
 $_SESSION['uid'] = $user_id;
 setcookie("uid", $user_id, time()+3600, '/');
