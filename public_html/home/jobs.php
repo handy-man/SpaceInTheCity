@@ -4,7 +4,7 @@ require("../config.php");
 require("../includes/session.php");
 require("../core/navigation.php");
 require("../core/functions.php");
-
+$user_id = $_SESSION['uid'];
 user_only($home);
 ?>
 <!DOCTYPE html>
@@ -33,15 +33,38 @@ user_only($home);
     <div class="container" style="width: 400px;">
 	
 	<?PHP
+	$connect = mysqli_connect($host,$user,$pass,$dbname);
+	//Loop through our jobs that are assigned to us and add them to an array.
+	$jobs_assigned = mysqli_query($connect, "SELECT * FROM `jobs_ass` WHERE `UID` = $user_id");
+	$jobs = array();
+	$properties = array();
+	$result = mysqli_num_rows($jobs_assigned);
+	if ($result > 0) {
+	while($joblist = mysqli_fetch_array($jobs_assigned, MYSQLI_ASSOC)) {	
+	$jobid = $joblist['JOBID'];
+	array_push($jobs, $jobid);
+	}
+	//For every job, grab details of the job
+	foreach ($jobs as $x){
+		$jobs_details = mysqli_query($connect, "SELECT * FROM `jobs` WHERE `ID` = '$x' AND status = '0'");
+		$job_details_print = mysqli_fetch_array($jobs_details, MYSQLI_ASSOC);
+		$properyid = $job_details_print['ID'];
+		array_push($properties, $properyid);
+	}
+	//for every property id for the jobs we get echo a link & job number.
+	foreach ($properties as $y){
+	
+	echo "<a href='job-start.php?ID=" . $y . "'>";
+	echo "<span class='label center-block label-primary' style='font-size: 35px; margin-bottom: 10px;'>Job number:" . $y . "</span>";
+	echo "</a>";
+	}
 	
 	
+	}//end result if statement
+	else{
+	echo "No jobs found";
+	}
 	?>
-	<a href="jobs.php">
-	<span class="label center-block label-primary" style="font-size: 35px;">Current Jobs  <span class="glyphicon glyphicon-exclamation-sign" style="font-size: 25px;"></span></span>
-	</a>
-	
-	
-	
 	
 	
     </div> <!-- /container -->
