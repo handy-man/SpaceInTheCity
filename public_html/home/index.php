@@ -31,8 +31,8 @@ user_only($home);
 		Navigation_home($home);
 	?>
     <div class="container" style="width: 400px;">
-	<a href="jobs.php">
-	<span class="label center-block label-primary" style="font-size: 35px;">Current Jobs  <span class="glyphicon glyphicon-exclamation-sign" style="font-size: 25px;"></span></span>
+	<a href="clean.php">
+	<span class="label center-block label-primary" style="font-size: 35px;">Clean a property  <span class="glyphicon glyphicon-exclamation-sign" style="font-size: 25px;"></span></span>
 	</a>
     </div> <!-- /container -->
 	
