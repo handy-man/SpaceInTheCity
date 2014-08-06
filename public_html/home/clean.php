@@ -7,6 +7,9 @@ require("../core/functions.php");
 $user_id = $_SESSION['uid'];
 user_only($home);
 
+if (isset($_POST['d'])){
+$_SESSION['development'] = $_POST['d'];
+}
 
  ?>
 <!DOCTYPE html>
@@ -33,7 +36,7 @@ user_only($home);
     <!-- Fixed navbar repeated code because we need to change active page. -->
 	<div id="wrap">
         <?PHP
-	Navigation_admin($home);
+	Navigation_home($home);
 	?>
     <div class="container">
 	<?PHP
@@ -50,9 +53,9 @@ user_only($home);
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron-user-edit">
 <?PHP
-if (!isset($_GET['d'])){
+if (!isset($_POST['d']) || !isset($_SESSION['development'])){
 ?>
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="get">
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
 	<p style="text-align: center;">Select which development you are in</p>
 <div style="margin-bottom: 10px;" class="input-group input-group-sm">
     <span class="input-group-addon">Development</span>
@@ -67,21 +70,27 @@ if (!isset($_GET['d'])){
 </form>
 <?PHP 
 }
-else if (isset($_GET['d']) && !isset($_GET['b'])){
+elseif (isset($_SESSION['development']) && !isset($_SESSION['building'])){
 ?>
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="get">
-	<p style="text-align: center;">Select which development you are in</p>
+<form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+	<p style="text-align: center;">Select which building you are in</p>
 <div style="margin-bottom: 10px;" class="input-group input-group-sm">
-    <span class="input-group-addon">Development</span>
+    <span class="input-group-addon">Building</span>
     <select name="b" class="form-control">
-		<option value='CW'>Building1</option>
-		<option value='QS'>Quayside / OcBuildings</option>
-		<option value='CIW'>City Wharf / Ocean Reach</option>
-		<option value='RG'>Richards House</option>
+		<option value='Marseille'>Marseille</option>
+		<option value='Nice House'>Nice House</option>
+		<option value='Bordeaux'>Bordeaux</option>
+		<option value='etc'>Etc...</option>
 	</select>
 </div>
+<button class='btn btn-lg btn-primary btn-block' type='submit'>Next</button>
 </form>
 <?PHP 
+}
+else if (isset($_POST['d']) && isset($_POST['b'])){
+?>
+<p>Test</p>
+<?PHP
 }
 ?>
 
