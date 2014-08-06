@@ -6,11 +6,15 @@ require("../core/navigation.php");
 require("../core/functions.php");
 $user_id = $_SESSION['uid'];
 user_only($home);
-
+$connect = mysqli_connect($host,$user,$pass,$dbname);
 if (isset($_POST['d'])){
 $_SESSION['development'] = $_POST['d'];
+echo $_SESSION['development'];
 }
-
+if (isset($_POST['b'])){
+$_SESSION['building'] = $_POST['b'];
+echo "building set";
+}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +57,7 @@ $_SESSION['development'] = $_POST['d'];
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron-user-edit">
 <?PHP
-if (!isset($_POST['d']) || !isset($_SESSION['development'])){
+if (!isset($_SESSION['development']) && !isset($_SESSION['building'])){
 ?>
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
 	<p style="text-align: center;">Select which development you are in</p>
@@ -71,23 +75,30 @@ if (!isset($_POST['d']) || !isset($_SESSION['development'])){
 <?PHP 
 }
 elseif (isset($_SESSION['development']) && !isset($_SESSION['building'])){
+$development = $_SESSION['development'];
 ?>
 <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
 	<p style="text-align: center;">Select which building you are in</p>
 <div style="margin-bottom: 10px;" class="input-group input-group-sm">
     <span class="input-group-addon">Building</span>
     <select name="b" class="form-control">
-		<option value='Marseille'>Marseille</option>
-		<option value='Nice House'>Nice House</option>
-		<option value='Bordeaux'>Bordeaux</option>
-		<option value='etc'>Etc...</option>
+	<?PHP 
+		$buildings_indev = mysqli_query($connect, "SELECT * FROM `properties` WHERE `development` = $development");
+		while ($row = mysqli_fetch_array( $buildings_indev)){
+		$building = $row['building'];
+		$apt_number = $row['apt_number'];
+		echo "test";
+		echo "<option value='" . $building . "'>" . $building . "</option>";
+		}
+	?>
 	</select>
 </div>
 <button class='btn btn-lg btn-primary btn-block' type='submit'>Next</button>
 </form>
 <?PHP 
+echo $development;
 }
-else if (isset($_POST['d']) && isset($_POST['b'])){
+else{
 ?>
 <p>Test</p>
 <?PHP
