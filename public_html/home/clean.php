@@ -7,14 +7,7 @@ require("../core/functions.php");
 $user_id = $_SESSION['uid'];
 user_only($home);
 $connect = mysqli_connect($host,$user,$pass,$dbname);
-if (isset($_POST['d'])){
-$_SESSION['development'] = $_POST['d'];
-echo $_SESSION['development'];
-}
-if (isset($_POST['b'])){
-$_SESSION['building'] = $_POST['b'];
-echo "building set";
-}
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,62 +41,131 @@ echo "building set";
 		if($Success == true){
 			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success! New committee role set.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
 		}
-
-        if($Success_refresh == true){
-      echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success! Image data refreshed.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
-    }
-
 	?>
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron-user-edit">
-<?PHP
-if (!isset($_SESSION['development']) && !isset($_SESSION['building'])){
-?>
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-	<p style="text-align: center;">Select which development you are in</p>
-<div style="margin-bottom: 10px;" class="input-group input-group-sm">
-    <span class="input-group-addon">Development</span>
-    <select name="d" class="form-control">
-		<option value='CW'>Century Wharf</option>
-		<option value='QS'>Quayside / Ocean Buildings</option>
-		<option value='CIW'>City Wharf / Ocean Reach</option>
-		<option value='RG'>Richards House</option>
-	</select>
-</div>
-<button class='btn btn-lg btn-primary btn-block' type='submit'>Next</button>
-</form>
-<?PHP 
-}
-elseif (isset($_SESSION['development']) && !isset($_SESSION['building'])){
-$development = $_SESSION['development'];
-?>
-<form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
-	<p style="text-align: center;">Select which building you are in</p>
-<div style="margin-bottom: 10px;" class="input-group input-group-sm">
-    <span class="input-group-addon">Building</span>
-    <select name="b" class="form-control">
-	<?PHP 
-		$buildings_indev = mysqli_query($connect, "SELECT * FROM `properties` WHERE `development` = $development");
-		while ($row = mysqli_fetch_array( $buildings_indev)){
-		$building = $row['building'];
-		$apt_number = $row['apt_number'];
-		echo "test";
-		echo "<option value='" . $building . "'>" . $building . "</option>";
+		<div class="page-header">
+  <h1>Cleaning <small>Century Wharf</small></h1>
+		</div>
+		
+		<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+		
+		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">Where are you?</span>
+		<select name="properties" class="form-control">
+		<?PHP
+		$propertylist = mysqli_query($connect, "SELECT `ID`, `apt_number`, `building` FROM `properties` WHERE `development` = 'CW'");
+		
+		while($propertylistprint = mysqli_fetch_array($propertylist, MYSQLI_ASSOC)) {
+		echo "<option value='" . $propertylistprint['ID'] . "'>" . $propertylistprint['building'] . " " . $propertylistprint['apt_number'] . "</option>";
 		}
-	?>
-	</select>
-</div>
-<button class='btn btn-lg btn-primary btn-block' type='submit'>Next</button>
+		
+		?>
+		</select>
+		</div>
+		
+		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">What type of clean is it?</span>
+		<select name="clean_type" class="form-control">
+			<option value='service'>service</option>
+			<option value='exit'>exit</option>
+			<option value='other'>other</option>
+		</select>
+		</div>
+		
+		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">Who is with you?</span>
+		<select name="hk_2" class="form-control">
+		<?PHP
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id'");
+		echo "<option value=''></option>";
+		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
+		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
+		}
+		
+		?>
+		</select>
+		</div>
+		
+		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">Who is with you?</span>
+		<select name="hk_3" class="form-control">
+		<?PHP
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2' AND `ID` != '$user_id'");
+		echo "<option value=''></option>";
+		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
+		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
+		}
+		
+		?>
+		</select>
+		</div>
+		
+		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">Who is with you?</span>
+		<select name="hk_4" class="form-control">
+		<?PHP
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id'");
+		echo "<option value=''></option>";
+		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
+		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
+		}
+		
+		?>
+		</select>
+		</div>
+		<span class="help-block">Clean started: <script type="text/javascript">
+<!--
+	var currentTime = new Date()
+	var hours = currentTime.getHours()
+	var minutes = currentTime.getMinutes()
+	var cur_hh = document.getElementById("cur_hh");
+	var cur_mm = document.getElementById("cur_mm");
+	if (minutes < 10)
+	minutes = "0" + minutes 
+	document.write("<b>" + hours + ":" + minutes + " " + "</b>")
+	document.getElementById("cur_hh").setAttribute("value", hours);
+	//-->
+</script>
+</span>
+		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<span class="input-group-addon">HH</span>
+		<input id="cur_hh" type="number" class="form-control" min="0" max="24" required>
+		</div>
+		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<span class="input-group-addon">MM</span>
+		<input id="cur_mm" type="number" class="form-control"  min="0" max="59" required>
+		</div>
+		
+				<span class="help-block">Clean Ended:</span>
+		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<span class="input-group-addon">HH</span>
+		<input type="number" class="form-control"  min="0" max="24" required>
+		</div>
+		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<span class="input-group-addon">MM</span>
+		<input type="number" class="form-control"  min="0" max="59" required>
+		</div>
+		
+				<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">Property ready for guests?</span>
+		<select name="clean_type" class="form-control">
+			<option value='yes'>Yes</option>
+			<option value='no'>No</option>
+		</select>
+		</div>
+		
+		<span class="help-block">Extra information:</span>
+		<textarea style="margin-bottom: 10px;" name="user_bio" class="form-control" rows="5" cols="400" name="content"><?php echo $user_bio ?></textarea>
+		
+	<div class="checkbox">
+    <label>
+      <input type="checkbox" required> I confirm that we have cleaned this apartment to the best of our ability and to company standards.
+    </label>
+  </div>
+	
+<button class='btn btn-lg btn-primary btn-block' type='submit'>Submit cleaning report</button>
 </form>
-<?PHP 
-echo $development;
-}
-else{
-?>
-<p>Test</p>
-<?PHP
-}
-?>
+
 
       </div> <!--/Jumbotron -- >
 
