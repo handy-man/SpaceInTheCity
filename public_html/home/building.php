@@ -38,32 +38,19 @@ user_only($home);
     <div class="container">
 	
 	<div class="page-header">
-		<h1>Development selection <small>Select a development</small></h1>
+		<h1>Building selection <small>Select a building</small></h1>
 	</div>
 	
-	<a href="building.php?d=CW">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Century Wharf</span>
+	<?PHP 
+	if ($_GET['d'] == "CW"){
+	?>
+	<a href="clean.php?d=CW&b=merisseell">
+	<span class="label center-block label-primary large-button" style="font-size: 35px;">Mareriseell?</span>
 	</a>
+	<?PHP
+	}
+	?>
 	
-		<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
-	
-			<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
-	
-	<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
-	
-			<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
-	
-			<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
     </div> <!-- /container -->
 	
 	</div><!-- /wrap -->

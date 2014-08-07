@@ -10,8 +10,8 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
     <span class='sr-only'>Toggle navigation</span><span class='icon-bar'></span><span class='icon-bar'></span><span class='icon-bar'></span></button>
     <a class='navbar-brand' href='" . $home . "/index.php'>SpaceInTheCity</a></div><div class='navbar-collapse collapse'>
     <ul class='nav navbar-nav'>";
-							
-		if ($activePage == "search.php")
+	
+			if ($activePage == "index.php")
 		  {
 		  echo "<li class='active'>";
 		  }
@@ -20,7 +20,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 			
-			echo "<a href='" . $home . "/home/search.php'>Search</a></li>";
+			echo "<a href='" . $home . "/home/index.php'>Home</a></li>";
 			
 			echo"</ul><ul class='nav navbar-nav navbar-right'>";
 			
