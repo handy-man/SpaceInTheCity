@@ -16,7 +16,7 @@ $apt_number = mysqli_real_escape_string($connect, $apt_number); //Shouldn't real
 $check = mysqli_query($connect, "SELECT * FROM `properties` WHERE `development` = '$dev_id' AND `building` = '$building_name' AND `apt_number` = '$apt_number'");	
 $result = mysqli_num_rows($check);
 
-if ($result == 1){
+if ($result == 1){	
 $alreadyexist = true;
 }
 else{
