@@ -8,7 +8,7 @@ require('../core/functions.php');
   <head>
 <?PHP include($home . "/includes/meta.html");  ?> 
 
-    <title>Admin manager - Create a new admin</title>
+    <title>Admin manager - Create or remove admins</title>
 	
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -33,15 +33,12 @@ $admin_email = mysqli_real_escape_string($connect, $admin_email); //Shouldn't re
 $check = mysqli_query($connect, "SELECT * FROM `users` WHERE `username` = '$admin_email'");	
 $result = mysqli_num_rows($check);
 
-$anyadmins = mysqli_query($connect, "SELECT * FROM `users` WHERE `admin` = '2' LIMIT 0, 30 ");	
+$anyadmins = mysqli_query($connect, "SELECT * FROM `users` WHERE `level` = '2' LIMIT 0, 30 ");	
 $anyadmin_result = mysqli_num_rows($anyadmins);
 //Anyadmin is used to check if we still have an admin, if we don't DO NOT ALLOW REMOVAL! (no admins is bad)
 if ($result == 1){
 $update = mysqli_query($connect, "UPDATE `users` SET `level` = '2' WHERE `username` = '$admin_email'");
 $_SESSION['editpushed'] = true;
-}
-else if($_SESSION['email'] == $admin_email){
-$_SESSION['editpushed'] = false;
 }
 else if ($anyadmin_result > 1){
 $update = mysqli_query($connect, "UPDATE `users` SET `level` = '0' WHERE `username` = '$admin_email'"); //not sure if should give to most people.
@@ -57,67 +54,47 @@ mysqli_close($connect);
     <!-- Fixed navbar repeated code because we need to change active page. -->
 	<div id="wrap">
     <?PHP
-	Navigation_admin();
+	Navigation_home($home);
 	?>
     <div class="container">
 	<?PHP
-	if (isset($_SESSION['editpushed'])){
 	
-		if($_SESSION['editpushed'] == true){
-			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success! Admin has been made or taken away.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
-			unset($_SESSION['editpushed']);
+		if($adminchange == 1){
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success! Admin has been given.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+			unset($adminchange);
 		}
-		else{
-			echo "<div style='text-align: center; margin: auto;' class='alert alert-danger fade in hints'>Don't try and edit yourself.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
-			unset($_SESSION['editpushed']);
+		
+		if($adminchange == 2){
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success! Admin has been taken away.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+			unset($adminchange);
 		}
-	}
-	
 	if ($noadmins == true){
 	echo "<div style='text-align: center; margin: auto;' class='alert alert-danger fade in hints'>No more admins left, you can't kill the last admin.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
 	unset($noadmins);
 	}
-	
 	?>
-	<img class="img-responsive img-center" src="../images/acog-logo.png" />
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+	<div class="page-header">
+		<h1>Admin manager  <small>Create a new Admin</small></h1>
+	</div>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-	<p style="text-align: center;">Make and break admins.</p>
-	<P>Enter the Email of the person you want to make an Admin, if they are already an Admin it will take it away.</p>
-    <input name="admin_email" type="text" class="form-control" placeholder="Email address" required>
-    <input class="form-control btn btn-success" type="submit" value="Save"> 
-
+    <input style="margin-bottom: 10px;" name="admin_email" type="text" class="form-control" placeholder="Username" required="">
+    <input class="form-control btn btn-success" type="submit" value="Make the above user an admin"> 
 </form>
 <p>Current list of admins:</p>
 
 <?PHP
 require_once('../dbconfig.php');
 $connect_1 = mysqli_connect($host,$user,$pass,$dbname);
-$adminlist = mysqli_query($connect_1, "SELECT * FROM `users` WHERE `admin` = '2' LIMIT 0, 30 ");	
+$adminlist = mysqli_query($connect_1, "SELECT * FROM `users` WHERE `level` = '2' LIMIT 0, 30 ");	
 while($adminlistprint = mysqli_fetch_array($adminlist, MYSQLI_ASSOC)) {
-echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>" . $adminlistprint['displayname'] . " - " . $adminlistprint['email'] . "</h3></div></div>";
+echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>" . $adminlistprint['username'] . "</h3></div></div>";
 }
 ?>
-<!--
-<p>Current list of non-admins:</p>
-<?PHP
-/**
-$nonadminlist = mysqli_query($connect_1, "SELECT * FROM `users` WHERE `admin` = '0' LIMIT 0, 30 ");	
-while($nonadminlistprint = mysqli_fetch_array($nonadminlist, MYSQLI_ASSOC)) {
-echo "<div class='panel panel-warning'><div class='panel-heading'><h3 class='panel-title'>" . $nonadminlistprint['displayname'] . " - " . $nonadminlistprint['email'] . "</h3></div></div>";
-}
-
-*/
-?>
-
--->
-
     </div> <!-- /container -->
 	
 	</div><!-- /wrap -->
-	<?PHP include("../includes/footer.php");?>
+	<?PHP include("../includes/footer.php"); ?>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

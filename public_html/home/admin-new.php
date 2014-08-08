@@ -15,7 +15,7 @@ setcookie("newuserset", "true", time()-3600, '/');
   <head>
 <?PHP include($home . "/includes/meta.html");  ?> 
 
-    <title>Aberystwyth Community of Gamers</title>
+    <title>Create a new user</title>
 	
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
