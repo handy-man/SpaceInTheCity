@@ -19,6 +19,7 @@ user_only($home);
 	<style>
 	.large-button{
 	margin-bottom: 20px;
+	font-size: 35px;
 	}
 	</style>
 
@@ -41,29 +42,17 @@ user_only($home);
 		<h1>Development selection <small>Select a development</small></h1>
 	</div>
 	
-	<a href="building.php?d=CW">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Century Wharf</span>
-	</a>
+		<?PHP
+		$connect_1 = mysqli_connect($host,$user,$pass,$dbname);
+		$devlist = mysqli_query($connect_1, "SELECT * FROM `developments` WHERE `enabled` = '1'");	
+		while($devlistprint = mysqli_fetch_array($devlist, MYSQLI_ASSOC)) {
+		echo "<a href='building.php?d=" . $devlistprint['dev_id'] . "'>
+		<span class='label center-block label-primary large-button'>" . $devlistprint['dev_name'] . "</span>
+		</a>";
+		}
+		?>
 	
-		<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
 	
-			<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
-	
-	<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
-	
-			<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
-	
-			<a href="building.php?d=QS">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Quayside</span>
-	</a>
     </div> <!-- /container -->
 	
 	</div><!-- /wrap -->

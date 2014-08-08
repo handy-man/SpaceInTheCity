@@ -3,11 +3,12 @@ require('../config.php');
 require('../core/navigation.php');
 require('../core/functions.php');
 require('../dbconfig.php');
-
-if (isset($_POST['buildingname'])){
 $connect = mysqli_connect($host,$user,$pass,$dbname);
+if (isset($_POST['buildingname'])){
 $building_name = $_POST['buildingname'];
+$dev_id = $_POST['dev_id'];
 $building_name = mysqli_real_escape_string($connect, $building_name); //Shouldn't really have to do this, our admins can be trusted right?
+$dev_id = mysqli_real_escape_string($connect, $dev_id); //Shouldn't really have to do this, our admins can be trusted right?
 $check = mysqli_query($connect, "SELECT * FROM `buildings` WHERE `building_name` = '$building_name'");	
 $result = mysqli_num_rows($check);
 
@@ -15,7 +16,7 @@ if ($result == 1){
 $alreadyexist = true;
 }
 else{
-$new_building = mysqli_query($connect, "INSERT into buildings (`building_name`) VALUES ('$building_name')");
+$new_building = mysqli_query($connect, "INSERT into buildings (`building_name`, `dev_id`) VALUES ('$building_name', '$dev_id')");
 $newbuilding = true;
 }
 
@@ -67,6 +68,21 @@ $newbuilding = true;
 
 	  
 		<form class="form-signin" name="form1" role="form" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+		
+		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">Development</span>
+		<select name="dev_id" class="form-control">
+		<?PHP
+		$developmentlist = mysqli_query($connect, "SELECT * FROM `developments`");
+		echo "<option value=''></option>";
+		while($developmentlistprint = mysqli_fetch_array($developmentlist, MYSQLI_ASSOC)) {
+		echo "<option value='" . $developmentlistprint['dev_id'] . "'>" . $developmentlistprint['dev_name'] . "</option>";
+		}
+		
+		?>
+		</select>
+		</div>
+		
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon"><span>Building name</span></span>
         <input name="buildingname" id="buildingname" data-toggle="tooltip" data-placement="right" title="" data-original-title="Building name" type="text" class="form-control" placeholder="Building name" required>

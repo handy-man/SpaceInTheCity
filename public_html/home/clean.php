@@ -44,7 +44,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 	?>
       <!-- Main component for a primary marketing message or call to action -->
 		<div class="page-header">
-  <h1>Cleaning <small>Century Wharf</small></h1>
+  <h1>Cleaning <small><?PHP echo $_GET['b']; ?></small></h1>
 		</div>
 		
 		<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
@@ -53,7 +53,12 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		<span class="input-group-addon">Where are you?</span>
 		<select name="properties" class="form-control">
 		<?PHP
-		$propertylist = mysqli_query($connect, "SELECT `ID`, `apt_number`, `building` FROM `properties` WHERE `development` = 'CW'");
+		$dev = $_GET['d'];
+		$dev = mysqli_real_escape_string($connect, $dev);
+		
+		$building = $_GET['b'];
+		$building = mysqli_real_escape_string($connect, $building);
+		$propertylist = mysqli_query($connect, "SELECT `ID`, `apt_number`, `building` FROM `properties` WHERE `building` = '$building'");
 		
 		while($propertylistprint = mysqli_fetch_array($propertylist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $propertylistprint['ID'] . "'>" . $propertylistprint['building'] . " " . $propertylistprint['apt_number'] . "</option>";

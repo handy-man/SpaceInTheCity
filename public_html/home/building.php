@@ -19,6 +19,7 @@ user_only($home);
 	<style>
 	.large-button{
 	margin-bottom: 20px;
+	font-size: 35px;
 	}
 	</style>
 
@@ -41,15 +42,17 @@ user_only($home);
 		<h1>Building selection <small>Select a building</small></h1>
 	</div>
 	
-	<?PHP 
-	if ($_GET['d'] == "CW"){
-	?>
-	<a href="clean.php?d=CW&b=merisseell">
-	<span class="label center-block label-primary large-button" style="font-size: 35px;">Mareriseell?</span>
-	</a>
-	<?PHP
-	}
-	?>
+		<?PHP
+		$connect_1 = mysqli_connect($host,$user,$pass,$dbname);
+		$dev = $_GET['d'];
+		$dev = mysqli_real_escape_string($connect_1, $dev); //Shouldn't really have to do this, our admins can be trusted right?
+		$buildinglist = mysqli_query($connect_1, "SELECT * FROM `buildings` WHERE `dev_id` = '$dev' AND `enabled` = '1'");	
+		while($buildinglistprint = mysqli_fetch_array($buildinglist, MYSQLI_ASSOC)) {
+		echo "<a href='clean.php?d=" . $buildinglistprint['dev_id'] . "&b=" . $buildinglistprint['building_name'] . "'>
+		<span class='label center-block label-primary large-button'>" . $buildinglistprint['building_name'] . "</span>
+		</a>";
+		}
+		?>
 	
     </div> <!-- /container -->
 	
