@@ -30,7 +30,7 @@ require('../dbconfig.php');
 $connect = mysqli_connect($host,$user,$pass,$dbname);
 $admin_email = $_POST['admin_email'];
 $admin_email = mysqli_real_escape_string($connect, $admin_email); //Shouldn't really have to do this, our admins can be trusted right?
-$check = mysqli_query($connect, "SELECT * FROM `users` WHERE `username` = '$admin_email'");	
+$check = mysqli_query($connect, "SELECT * FROM `users` WHERE `username` = '$admin_email' AND `level` != '2'");	
 $result = mysqli_num_rows($check);
 
 $anyadmins = mysqli_query($connect, "SELECT * FROM `users` WHERE `level` = '2' LIMIT 0, 30 ");	
@@ -38,11 +38,11 @@ $anyadmin_result = mysqli_num_rows($anyadmins);
 //Anyadmin is used to check if we still have an admin, if we don't DO NOT ALLOW REMOVAL! (no admins is bad)
 if ($result == 1){
 $update = mysqli_query($connect, "UPDATE `users` SET `level` = '2' WHERE `username` = '$admin_email'");
-$_SESSION['editpushed'] = true;
+$adminchange = 1;
 }
 else if ($anyadmin_result > 1){
 $update = mysqli_query($connect, "UPDATE `users` SET `level` = '0' WHERE `username` = '$admin_email'"); //not sure if should give to most people.
-$_SESSION['editpushed'] = true;
+$adminchange = 2;
 }
 else{
 $noadmins = true;
