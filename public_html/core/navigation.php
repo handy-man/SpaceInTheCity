@@ -61,8 +61,50 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 				   
 				   echo "<a href='./admin-pass.php'>Password changer</a></li>
 				</ul>
+            </li>";
+		
+		
+								echo "<li class='dropdown'>
+				<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Property management<b class='caret'></b></a>
+				<ul class='dropdown-menu'>";
+				
+		if ($activePage == "building-manager.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				   echo "<a href='./building-manager.php'>Building management</a></li>";
+				   
+				   		if ($activePage == "development-manager.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				  echo "<a href='./development-manager.php'>Development manager</a></li>";
+				  
+				   
+				   		if ($activePage == "property-manager.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				   echo "<a href='./property-manager.php'>Property manager</a></li>
+				</ul>
             </li>
 		</ul>";
+		
 			
 			}
 			
