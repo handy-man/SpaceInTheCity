@@ -22,6 +22,64 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 			
 			echo "<a href='" . $home . "/home/index.php'>Home</a></li>";
 			
+			if ($_SESSION['admin'] == 2){
+			
+									echo "<li class='dropdown'>
+				<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Super tools<b class='caret'></b></a>
+				<ul class='dropdown-menu'>";
+				
+		if ($activePage == "admin-new.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				   echo "<a href='./admin-new.php'>New user</a></li>";
+				   
+				   		if ($activePage == "admin-edit.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				  echo "<a href='./admin-edit.php'>Admin manager</a></li>";
+				  
+				   
+				   		if ($activePage == "admin-pass.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				   echo "<a href='./admin-pass.php'>Password changer</a></li>";						
+				 
+		if ($activePage == "admin-settings.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+		  
+		  
+				   
+				   echo "<a href='./admin-settings.php'>Settings</a></li>
+				</ul>
+            </li>
+		</ul>";
+			
+			}
+			
 			echo"</ul><ul class='nav navbar-nav navbar-right'>";
 			
             if (isset($_SESSION['displayname'])){

@@ -53,7 +53,7 @@ setcookie("reallybaduser", "true", time()-3600, '/');
   <head>
 <?PHP include($home . "/includes/meta.html");  ?> 
 
-    <title>Login // abercog.co.uk</title>
+    <title>Login // aspaceinthecity.co.uk</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
