@@ -109,7 +109,7 @@ $newbuilding = true;
 		
 		<div  style="margin-bottom: 10px;"></div>
 		
-		<button class='btn btn-lg btn-primary btn-block' type='submit'>Add a new property</button>
+		<button class='btn btn-lg btn-success btn-block' type='submit'>Add a new property</button>
 		<div  style="margin-bottom: 15px;"></div>
 		
       </form>
