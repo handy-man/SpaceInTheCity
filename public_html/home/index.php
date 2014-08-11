@@ -6,6 +6,8 @@ require("../core/navigation.php");
 require("../core/functions.php");
 
 user_only($home);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

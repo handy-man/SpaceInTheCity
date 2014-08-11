@@ -53,8 +53,7 @@ $date_today = curdate();
 
 //Insert all our data!
 $clean_insert = mysqli_query($connect, "INSERT into clean (`apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `clean`, `notes`, `declaration`, `photo`, `dateofclean`) VALUES ('$property_id', '$author_name', '$housekeeper_2', '$housekeeper_3', '$housekeeper_4', '$clean_type', '$start_hour', '$start_minute', '$end_hour', '$end_minute', '$property_ready', '$extra_notes', '1', 'PHOTO', '$date_today')");
-
-
-//header('Location: ' . $home . '/home/index.php');
+setcookie("cleaningsubmitted", "true", time()+60, '/');
+header('Location: ' . $home . '/home/index.php');
 
  ?>
