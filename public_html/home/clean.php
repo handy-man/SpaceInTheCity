@@ -154,8 +154,8 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 				<div style="margin-bottom: 10px;" class="input-group input-group-sm">
 		<span class="input-group-addon">Property ready for guests?</span>
 		<select name="prop_ready" class="form-control">
-			<option value='yes'>Yes</option>
-			<option value='no'>No</option>
+			<option value='1'>Yes</option>
+			<option value='0'>No</option>
 		</select>
 		</div>
 		
@@ -164,7 +164,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		
 	<div class="checkbox">
     <label>
-      <input name="bestofability" type="checkbox" required> I confirm that we have cleaned this apartment to the best of our ability and to company standards.
+      <input name="bestofability" type="checkbox"value="1" required> I confirm that we have cleaned this apartment to the best of our ability and to company standards.
     </label>
   </div>
 	

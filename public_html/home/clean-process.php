@@ -8,8 +8,7 @@ require("../includes/settings.php");
 //Database connect
 $connect = mysqli_connect($host,$user,$pass,$dbname);
 //Who is submitting the report?
-$author_name=$_SESSION['displayname'];
-$author_name = mysqli_real_escape_string($connect, $author_name);
+$author_name=$_SESSION['uid'];
 //Property ID grab
 $property_id=$_POST['properties'];
 $property_id = mysqli_real_escape_string($connect, $property_id);
