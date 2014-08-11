@@ -47,7 +47,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
   <h1>Cleaning <small><?PHP echo $_GET['b']; ?></small></h1>
 		</div>
 		
-		<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+		<form action="./clean-process.php" method="post">
 		
 		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
 		<span class="input-group-addon">Where are you?</span>
@@ -134,37 +134,37 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 </span>
 		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
 		<span class="input-group-addon">HH</span>
-		<input id="cur_hh" type="number" class="form-control" min="0" max="24" required>
+		<input name="start_hh" type="number" class="form-control" min="0" max="24" required>
 		</div>
 		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
 		<span class="input-group-addon">MM</span>
-		<input id="cur_mm" type="number" class="form-control"  min="0" max="59" required>
+		<input name="start_mm" type="number" class="form-control"  min="0" max="59" required>
 		</div>
 		
 				<span class="help-block">Clean Ended:</span>
 		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
 		<span class="input-group-addon">HH</span>
-		<input type="number" class="form-control"  min="0" max="24" required>
+		<input name="end_hh" type="number" class="form-control"  min="0" max="24" required>
 		</div>
 		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
 		<span class="input-group-addon">MM</span>
-		<input type="number" class="form-control"  min="0" max="59" required>
+		<input name="end_mm" type="number" class="form-control"  min="0" max="59" required>
 		</div>
 		
 				<div style="margin-bottom: 10px;" class="input-group input-group-sm">
 		<span class="input-group-addon">Property ready for guests?</span>
-		<select name="clean_type" class="form-control">
+		<select name="prop_ready" class="form-control">
 			<option value='yes'>Yes</option>
 			<option value='no'>No</option>
 		</select>
 		</div>
 		
 		<span class="help-block">Extra information:</span>
-		<textarea style="margin-bottom: 10px;" name="user_bio" class="form-control" rows="5" cols="400" name="content"><?php echo $user_bio ?></textarea>
+		<textarea style="margin-bottom: 10px;" name="extra_notes" class="form-control" rows="5" cols="400" name="content"><?php echo $user_bio ?></textarea>
 		
 	<div class="checkbox">
     <label>
-      <input type="checkbox" required> I confirm that we have cleaned this apartment to the best of our ability and to company standards.
+      <input name="bestofability" type="checkbox" required> I confirm that we have cleaned this apartment to the best of our ability and to company standards.
     </label>
   </div>
 	
