@@ -7,7 +7,10 @@ require("../core/functions.php");
 
 user_only($home);
 
-
+if (isset($_COOKIE['cleaningsubmitted'])){
+$submitted = true;
+setcookie("cleaningsubmitted", "true", time()-3600, '/');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +42,12 @@ user_only($home);
 		
 		
     <div class="container">
+	<?PHP
+		if (isset($submitted)){
+		echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success! the cleaning report has been submitted.</div>";
+	}
+	
+	?>
 	
 	<div class="page-header">
 		<h1>Development selection <small>Select a development</small></h1>
