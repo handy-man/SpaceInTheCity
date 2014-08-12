@@ -5,7 +5,7 @@ require("./config.php");
 <html lang="en">
   <head>
 <?PHP include($home . "/includes/meta.html");  ?> 
-	<meta http-equiv="refresh" content="1;url=./home/">
+	<meta http-equiv="refresh" content="2;url=./home/">
     <title>Logging in...</title>
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">

@@ -4,7 +4,7 @@ require("./dbconfig.php");
 require("./config.php");
 require("./includes/session.php");
 require("./includes/settings.php");
-
+$_SESSION['uid'] = 0;
 //Database connect
 $connect = mysqli_connect($host,$user,$pass,$dbname);
 //Username & password grab
@@ -29,17 +29,11 @@ $user_displayname = $playerarray['username'];
 $user_id = $playerarray['ID'];
 $user_admin_status = $playerarray['level'];
 //redirect user to our profiles etc
-if ($login_enabled == false){
-setcookie("reallybaduser", "true", time()+60, '/');
-header('Location: ' . $home . '/');
-}
-else{
 $_SESSION['admin'] = $user_admin_status;
 $_SESSION['displayname'] = $user_displayname;
 $_SESSION['uid'] = $user_id;
 setcookie("uid", $user_id, time()+3600, '/');
 header('Location: ' . $home . '/login-success.php');
-}
 }
 else{
 setcookie("baduser", "true", time()+60, '/');

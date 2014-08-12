@@ -1,15 +1,16 @@
-<?PHP require('adminonly.php');
-require('../config.php');
-require('../core/navigation.php');
-require('../core/functions.php');
- ?>
+<?PHP
+require("../dbconfig.php");
+require("../config.php");
+require("../includes/session.php");
+require("../core/navigation.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
 <?PHP include($home . "/includes/meta.html");  ?> 
 
-    <title>Aberystwyth Community of Gamers</title>
-	
+    <title>ERROR</title>
+
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
 
@@ -21,30 +22,21 @@ require('../core/functions.php');
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
+  <body>
 
-  <body>	
+	
     <!-- Fixed navbar repeated code because we need to change active page. -->
 	<div id="wrap">
         <?PHP
-	Navigation_admin();
+		Navigation_home($home);
 	?>
     <div class="container">
-	<img class="img-responsive img-center" src="../images/acog-logo.png" />
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-
-<p>Logs of who did what: Userid -> event -> Time</p>
-
-<?PHP
-require_once('../dbconfig.php');
-$connect_1 = mysqli_connect($host,$user,$pass,$dbname);
-$logslist = mysqli_query($connect_1, "SELECT * FROM `logs` order by `LOGID` DESC");	
-while($logslistprint = mysqli_fetch_array($logslist, MYSQLI_ASSOC)) {
-echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'> user: " . $logslistprint['user_id'] . " - " . $logslistprint['event'] . " @ " . $logslistprint['time'] . "</h3></div></div>";
-}
-?>
+	      <div class="jumbotron">
+		<p>ERROR, Something went wrong. Please try to login again or contact the office.</p>
       </div>
-
+	
+	
     </div> <!-- /container -->
 	
 	</div><!-- /wrap -->
