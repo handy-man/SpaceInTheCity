@@ -36,12 +36,6 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 	Navigation_home($home);
 	?>
     <div class="container">
-	<?PHP
-	
-		if($Success == true){
-			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success! New committee role set.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
-		}
-	?>
       <!-- Main component for a primary marketing message or call to action -->
 		<div class="page-header">
   <h1>Cleaning <small><?PHP echo $_GET['b']; ?></small></h1>
@@ -58,7 +52,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		
 		$building = $_GET['b'];
 		$building = mysqli_real_escape_string($connect, $building);
-		$propertylist = mysqli_query($connect, "SELECT `ID`, `apt_number`, `building` FROM `properties` WHERE `building` = '$building'");
+		$propertylist = mysqli_query($connect, "SELECT `ID`, `apt_number`, `building` FROM `properties` WHERE `building` = '$building' ORDER BY `apt_number` ASC");
 		
 		while($propertylistprint = mysqli_fetch_array($propertylist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $propertylistprint['ID'] . "'>" . $propertylistprint['building'] . " " . $propertylistprint['apt_number'] . "</option>";

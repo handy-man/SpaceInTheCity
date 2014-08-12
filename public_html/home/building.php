@@ -46,7 +46,7 @@ user_only($home);
 		$connect_1 = mysqli_connect($host,$user,$pass,$dbname);
 		$dev = $_GET['d'];
 		$dev = mysqli_real_escape_string($connect_1, $dev); //Shouldn't really have to do this, our admins can be trusted right?
-		$buildinglist = mysqli_query($connect_1, "SELECT * FROM `buildings` WHERE `dev_id` = '$dev' AND `enabled` = '1'");	
+		$buildinglist = mysqli_query($connect_1, "SELECT * FROM `buildings` WHERE `dev_id` = '$dev' AND `enabled` = '1' ORDER BY `building_name` ASC");	
 		while($buildinglistprint = mysqli_fetch_array($buildinglist, MYSQLI_ASSOC)) {
 		echo "<a href='clean.php?d=" . $buildinglistprint['dev_id'] . "&b=" . $buildinglistprint['building_name'] . "'>
 		<span class='label center-block label-primary large-button'>" . $buildinglistprint['building_name'] . "</span>

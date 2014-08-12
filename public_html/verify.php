@@ -33,7 +33,7 @@ $_SESSION['admin'] = $user_admin_status;
 $_SESSION['displayname'] = $user_displayname;
 $_SESSION['uid'] = $user_id;
 setcookie("uid", $user_id, time()+3600, '/');
-header('Location: ' . $home . '/login-success.php');
+header('Location: ./login-success.php');
 }
 else{
 setcookie("baduser", "true", time()+60, '/');
