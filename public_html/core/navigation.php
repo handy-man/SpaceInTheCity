@@ -126,7 +126,26 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 				   echo "<a href='./property-manager.php'>Property manager</a></li>
 				</ul>
             </li>
-		</ul>";
+		";
+		
+		echo "<li class='dropdown'>
+				<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Reports<b class='caret'></b></a>
+				<ul class='dropdown-menu'>";
+				
+		if ($activePage == "status.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				   echo "<a href='./status.php'>Status</a></li>";
+				   
+	
+				   
+				   echo "</ul> </li> </ul>";
 		
 			
 			}
