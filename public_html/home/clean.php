@@ -38,7 +38,8 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
     <div class="container">
       <!-- Main component for a primary marketing message or call to action -->
 		<div class="page-header">
-  <h1>Cleaning <small><?PHP echo $_GET['b']; ?></small></h1>
+		<h1>Cleaning <small><?PHP echo $_GET['b']; ?></small></h1>
+		<h5>Report being completed by: <?PHP echo $_SESSION['displayname']; ?></h5>
 		</div>
 		
 		<form action="./clean-process.php" method="post">
@@ -75,7 +76,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		<span class="input-group-addon">Who is with you?</span>
 		<select name="hk_2" class="form-control">
 		<?PHP
-		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id'");
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id' ORDER BY `username` ASC");
 		echo "<option value=''></option>";
 		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
@@ -89,7 +90,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		<span class="input-group-addon">Who is with you?</span>
 		<select name="hk_3" class="form-control">
 		<?PHP
-		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2' AND `ID` != '$user_id'");
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2' AND `ID` != '$user_id'  ORDER BY `username` ASC");
 		echo "<option value=''></option>";
 		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
@@ -103,7 +104,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		<span class="input-group-addon">Who is with you?</span>
 		<select name="hk_4" class="form-control">
 		<?PHP
-		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id'");
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id'  ORDER BY `username` ASC");
 		echo "<option value=''></option>";
 		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
