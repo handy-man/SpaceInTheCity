@@ -46,14 +46,26 @@ $extra_notes = mysqli_real_escape_string($connect, $extra_notes);
 $cleaned_to_best=$_POST['bestofability'];
 $cleaned_to_best = mysqli_real_escape_string($connect, $cleaned_to_best);
 
+$photos_exist=$_POST['photos'];
+$photos_exist = mysqli_real_escape_string($connect, $photos_exist);
+
 function curdate() {
     return date('Y-m-d');
 }
 $date_today = curdate();
 
 //Insert all our data!
-$clean_insert = mysqli_query($connect, "INSERT into clean (`apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `clean`, `notes`, `declaration`, `photo`, `dateofclean`) VALUES ('$property_id', '$author_name', '$housekeeper_2', '$housekeeper_3', '$housekeeper_4', '$clean_type', '$start_hour', '$start_minute', '$end_hour', '$end_minute', '$property_ready', '$extra_notes', '1', 'PHOTO', '$date_today')");
+$clean_insert = mysqli_query($connect, "INSERT into clean (`apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `clean`, `notes`, `declaration`, `photo`, `dateofclean`) VALUES ('$property_id', '$author_name', '$housekeeper_2', '$housekeeper_3', '$housekeeper_4', '$clean_type', '$start_hour', '$start_minute', '$end_hour', '$end_minute', '$property_ready', '$extra_notes', '$cleaned_to_best', '$photos_exist', '$date_today')");
+
+$clean_id_grab = mysqli_query($connect, "SELECT `ID` FROM `clean` WHERE `dateofclean` = '$date_today' AND `apt_id` = '$property_id'");
+$row = $clean_id_grab->fetch_array(MYSQLI_ASSOC);
+$clean_id = $row['ID'];
+
+if($photos_exist != 1){
 setcookie("cleaningsubmitted", "true", time()+60, '/');
 header('Location: ' . $home . '/home/index.php');
-
+}
+else{
+header('Location: ' . $home . '/home/clean-photo.php?cid=' . $clean_id . '');
+}
  ?>

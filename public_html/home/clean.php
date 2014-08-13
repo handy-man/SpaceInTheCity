@@ -161,7 +161,13 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
     <label>
       <input name="bestofability" type="checkbox"value="1" required> I confirm that we have cleaned this apartment to the best of our ability and to company standards.
     </label>
-  </div>
+	</div>
+	
+		<div class="checkbox">
+    <label>
+      <input name="photos" type="checkbox"value="1"> Do you need to take photo's of the property?
+    </label>
+	</div>
 	
 <button class='btn btn-lg btn-primary btn-block' type='submit'>Submit cleaning report</button>
 </form>

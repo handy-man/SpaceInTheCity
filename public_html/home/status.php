@@ -20,6 +20,30 @@ user_only($home);
 	margin-bottom: 20px;
 	font-size: 35px;
 	}
+	
+	.report-display{
+	width: 40%; 
+	margin: auto; 
+	margin-bottom: 10px;
+	}
+	
+	.datepicker-input{
+	width: 20%;
+	}
+	
+	
+	@media (max-width: 768px) {
+
+  	.report-display{
+	width: 100%; 
+	margin: auto; 
+	margin-bottom: 10px;
+	}
+
+	.datepicker-input{
+	width: 100%;
+	}
+}
 	</style>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -51,7 +75,7 @@ user_only($home);
 			<span class="input-group-btn">
 			<button class="btn btn-default" type="submit">Filter</button>
 			</span>
-		<input type="text" style="width: 20%;" class="form-control" name="datepicker" id="datepicker" size="30" value="<?PHP if (!isset($_POST['datepicker'])){$curdate = curdate(); echo $curdate; } else { echo $_POST['datepicker']; }  ?>">
+		<input type="text" class="form-control datepicker-input" name="datepicker" id="datepicker" size="30" value="<?PHP if (!isset($_POST['datepicker'])){$curdate = curdate(); echo $curdate; } else { echo $_POST['datepicker']; }  ?>">
 	</div>
 	</form>
 	</div>
@@ -72,7 +96,7 @@ user_only($home);
 	$housekeeper3name = gethousekeepername($connect, $housekeeper3);
 	$housekeeper4 = $cleansprint['HK4'];
 	$housekeeper4name = gethousekeepername($connect, $housekeeper4);
-	echo "<div class='panel panel-primary' style='width: 40%; margin: auto; margin-bottom: 10px;'>
+	echo "<div class='panel panel-primary report-display'>
   <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'>" . $property_details ."</div>
   <ul class='list-group'>
     <li class='list-group-item'>" . $housekeeper1name . " " . $housekeeper2name . " " . $housekeeper3name . " " . $housekeeper4name . "</li>
@@ -96,7 +120,7 @@ user_only($home);
 	$housekeeper3name = gethousekeepername($connect, $housekeeper3);
 	$housekeeper4 = $cleansprint['HK4'];
 	$housekeeper4name = gethousekeepername($connect, $housekeeper4);
-	echo "<div class='panel panel-primary' style='width: 40%; margin: auto; margin-bottom: 10px;'>
+	echo "<div class='panel panel-primary report-display'>
   <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'>" . $property_details ."</div>
   <ul class='list-group'>
     <li class='list-group-item'>" . $housekeeper1name . " " . $housekeeper2name . " " . $housekeeper3name . " " . $housekeeper4name . "</li>
