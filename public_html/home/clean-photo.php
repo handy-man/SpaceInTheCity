@@ -88,7 +88,7 @@ if(isset($_FILES['files'])){
 		</div>
 		<form action="<?PHP $_SERVER['PHP_SELF']  . "?cid=" . $_GET['cid']; ?>" method="post" enctype="multipart/form-data">
 		<input type="file" name="files[]" multiple/>
-		<button class='btn btn-lg btn-primary btn-block' type='submit'>Submit photo</button>
+		<button style="margin-top: 20px;" class='btn btn-lg btn-primary btn-block' type='submit'>Submit photo</button>
 		</form>
 	<div style="margin-top: 30px;"></div>
 	<a href="./index.php"><button class='btn btn-lg btn-danger btn-block'>Finished</button></a>

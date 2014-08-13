@@ -4,7 +4,6 @@ require("./dbconfig.php");
 require("./config.php");
 require("./includes/session.php");
 require("./includes/settings.php");
-$_SESSION['uid'] = 0;
 //Database connect
 $connect = mysqli_connect($host,$user,$pass,$dbname);
 //Username & password grab
@@ -37,7 +36,7 @@ header('Location: ./login-success.php');
 }
 else{
 setcookie("baduser", "true", time()+60, '/');
-header('Location: ' . $home . '/');
+header('Location: ' . $home . '/login.php');
 }
 
  ?>

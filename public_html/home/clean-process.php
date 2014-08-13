@@ -30,12 +30,18 @@ $start_hour = mysqli_real_escape_string($connect, $start_hour);
 //Minute of start for the clean
 $start_minute=$_POST['start_mm'];
 $start_minute = mysqli_real_escape_string($connect, $start_minute);
+if ($start_minute == 0){
+$start_minute = 00;
+}
 //Hour of end for the clean
 $end_hour=$_POST['end_hh'];
 $end_hour = mysqli_real_escape_string($connect, $end_hour);
 //Minute of end of the clean
 $end_minute=$_POST['end_mm'];
 $end_minute = mysqli_real_escape_string($connect, $end_minute);
+if ($end_minute == 0){
+$end_minute = 00;
+}
 //Is the property ready? (if no notes are important!)
 $property_ready=$_POST['prop_ready'];
 $property_ready = mysqli_real_escape_string($connect, $property_ready);

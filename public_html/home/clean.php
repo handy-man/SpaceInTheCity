@@ -127,26 +127,26 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 	//-->
 </script>
 </span>
-		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<div style="width: 25%;" class="input-group input-group-sm">
 		<span class="input-group-addon">HH</span>
 		<input name="start_hh" type="number" class="form-control" min="0" max="24" required>
 		</div>
-		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<div style="width: 25%; margin-top: -30px; margin-left: 26%;" class="input-group input-group-sm">
 		<span class="input-group-addon">MM</span>
 		<input name="start_mm" type="number" class="form-control"  min="0" max="59" required>
 		</div>
 		
 				<span class="help-block">Clean Ended:</span>
-		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<div style="width: 25%;" class="input-group input-group-sm">
 		<span class="input-group-addon">HH</span>
 		<input name="end_hh" type="number" class="form-control"  min="0" max="24" required>
 		</div>
-		<div style="width: 25%; margin-bottom: 5px;" class="input-group input-group-sm">
+		<div style="width: 25%; margin-top: -30px; margin-left: 26%;" class="input-group input-group-sm">
 		<span class="input-group-addon">MM</span>
 		<input name="end_mm" type="number" class="form-control"  min="0" max="59" required>
 		</div>
 		
-				<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+				<div style="margin-top: 10px; margin-bottom: 10px;" class="input-group input-group-sm">
 		<span class="input-group-addon">Property ready for guests?</span>
 		<select name="prop_ready" class="form-control">
 			<option value='1'>Yes</option>
