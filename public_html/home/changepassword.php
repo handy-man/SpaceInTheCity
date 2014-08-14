@@ -25,7 +25,7 @@ $result = mysqli_num_rows($check);
 if($password != $password_conf){
 //redirect back to index with error
 setcookie("mismatch", "true", time()+60, '/');
-header('Location: ./home/admin-pass.php');
+header('Location: ./admin-pass.php');
 exit();
 }
 else if($result == 1){

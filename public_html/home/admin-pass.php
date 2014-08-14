@@ -19,6 +19,9 @@ $noexist = true;
 setcookie("noexist", "true", time()-3600, '/');
 }
 
+$connect = mysqli_connect($host,$user,$pass,$dbname);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,10 +71,24 @@ setcookie("noexist", "true", time()-3600, '/');
 
 	  
 		<form class="form-signin" name="form1" role="form" method="post" action="./changepassword.php">
-		<div class="input-group input-group-sm">
-		<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-        <input name="displayname" id="displayname" data-toggle="tooltip" data-placement="right" title="" data-original-title="Displayname" type="text" class="form-control" placeholder="Display Name" required>
+		
+		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">User</span>
+		<select name="displayname" class="form-control">
+		<?PHP
+	
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` ORDER BY `username` ASC");
+		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
+		echo "<option value='" . $userlistprint['username'] . "'>" . $userlistprint['username'] . "</option>";
+		}
+		
+	
+		
+		?>
+		</select>
 		</div>
+		
+		
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
         <input name="password" id="password" data-toggle="tooltip" data-placement="right" title="" data-original-title="Password" type="password" class="form-control" placeholder="Password" required>
