@@ -25,12 +25,12 @@ $result = mysqli_num_rows($check);
 if($password != $password_conf){
 //redirect back to index with error
 setcookie("mismatch", "true", time()+60, '/');
-header('Location: ./register.php');
+header('Location: ./admin-new.php');
 exit();
 }
 else if($result == 1){
 setcookie("exist", "true", time()+60, '/');
-header('Location: ./register.php');
+header('Location: ./admin-new.php');
 exit();
 }
 else{

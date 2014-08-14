@@ -9,6 +9,18 @@ $newuserset = true;
 setcookie("newuserset", "true", time()-3600, '/');
 }
 
+
+if (isset($_COOKIE['exist'])){
+$exist = true;
+setcookie("exist", "true", time()-3600, '/');
+}
+
+
+if (isset($_COOKIE['mismatch'])){
+$mismatch = true;
+setcookie("mismatch", "true", time()-3600, '/');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +52,14 @@ setcookie("newuserset", "true", time()-3600, '/');
 	<?PHP
 		if($newuserset == true){
 			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success new user created!<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+		}
+		
+		if($exist == true){
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-danger fade in hints'>ERROR! that user exists already.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+		}
+		
+			if($mismatch == true){
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-danger fade in hints'>ERROR! the passwords are different.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
 		}
 	
 	?>
