@@ -25,7 +25,7 @@ $result = mysqli_num_rows($check);
 if($password != $password_conf){
 //redirect back to index with error
 setcookie("mismatch", "true", time()+60, '/');
-header('Location:' . $home . '/home/admin-pass.php');
+header('Location: ./home/admin-pass.php');
 exit();
 }
 else if($result == 1){
@@ -38,11 +38,11 @@ $salt = crypt($salt_part1, $salt_part2);
 $password = crypt($password, $salt);
 setcookie("passwordchanged", "true", time()+60, '/');
 $new_user = mysqli_query($connect, "UPDATE `users` SET `password` = '$password', `salt` = '$salt' WHERE `username` = '$displayname'");
-header('Location:' . $home . '/home/admin-pass.php');
+header('Location: ./admin-pass.php');
 }
 else{
 setcookie("noexist", "true", time()+60, '/');
-header('Location:' . $home . '/home/admin-pass.php');
+header('Location: ./admin-pass.php');
 
 }
 ?>

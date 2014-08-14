@@ -25,12 +25,12 @@ $result = mysqli_num_rows($check);
 if($password != $password_conf){
 //redirect back to index with error
 setcookie("mismatch", "true", time()+60, '/');
-header('Location:' . $home . '/register/');
+header('Location: ./register.php');
 exit();
 }
 else if($result == 1){
 setcookie("exist", "true", time()+60, '/');
-header('Location:' . $home . '/register/');
+header('Location: ./register.php');
 exit();
 }
 else{
@@ -43,7 +43,7 @@ $salt = crypt($salt_part1, $salt_part2);
 $password = crypt($password, $salt);
 setcookie("newuserset", "true", time()+60, '/');
 $new_user = mysqli_query($connect, "INSERT into users (`username`, `password`, `salt`) VALUES ('$displayname', '$password', '$salt')");
-header('Location:' . $home . '/home/admin-new.php');
+header('Location: ./admin-new.php');
 }	
 ?>
 

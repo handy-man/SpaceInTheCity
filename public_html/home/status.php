@@ -87,7 +87,7 @@ user_only($home);
 	$connect = mysqli_connect($host,$user,$pass,$dbname);
 	if (!isset($_POST['datepicker'])){
 	$curdate = curdate();
-	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo` FROM `clean` WHERE `dateofclean` = '$curdate' ORDER BY `apt_id` ASC ");	
+	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `notes`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo` FROM `clean` WHERE `dateofclean` = '$curdate' ORDER BY `apt_id` ASC ");	
 	while($cleansprint = mysqli_fetch_array($cleans, MYSQLI_ASSOC)) {
 	$clean_id = $cleansprint['ID'];
 	$propertyid = $cleansprint['apt_id'];
@@ -126,7 +126,7 @@ user_only($home);
 	}
 	else{
 	$curdate = $_POST['datepicker'];
-	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo` FROM `clean` WHERE `dateofclean` = '$curdate' ORDER BY `apt_id` ASC ");	
+	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `notes`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo` FROM `clean` WHERE `dateofclean` = '$curdate' ORDER BY `apt_id` ASC ");	
 	while($cleansprint = mysqli_fetch_array($cleans, MYSQLI_ASSOC)) {
 	$clean_id = $cleansprint['ID'];
 	$propertyid = $cleansprint['apt_id'];
