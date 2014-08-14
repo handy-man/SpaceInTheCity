@@ -74,7 +74,7 @@ $noadmins = true;
 	}
 	?>
 	<div class="page-header">
-		<h1>Admin manager  <small>Create/ Remove admins</small></h1>
+		<h1>Report access manager <small>Create/ Remove reports access</small></h1>
 	</div>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
@@ -95,14 +95,14 @@ $noadmins = true;
 		</select>
 		</div>
 
-    <input class="form-control btn btn-success" type="submit" value="Make/ remove the above user an admin"> 
+    <input class="form-control btn btn-success" type="submit" value="Give the above user access to daily reports."> 
 </form>
-<p>Current list of admins:</p>
+<p>Current list of HK report access:</p>
 
 <?PHP
 require_once('../dbconfig.php');
 $connect_1 = mysqli_connect($host,$user,$pass,$dbname);
-$adminlist = mysqli_query($connect_1, "SELECT * FROM `users` WHERE `level` = '2' LIMIT 0, 30 ");	
+$adminlist = mysqli_query($connect_1, "SELECT * FROM `users` WHERE `level` == '1' LIMIT 0, 30 ");	
 while($adminlistprint = mysqli_fetch_array($adminlist, MYSQLI_ASSOC)) {
 echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>" . $adminlistprint['username'] . "</h3></div></div>";
 }

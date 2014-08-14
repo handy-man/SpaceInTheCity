@@ -39,11 +39,12 @@ $password = crypt($password, $salt);
 setcookie("passwordchanged", "true", time()+60, '/');
 $new_user = mysqli_query($connect, "UPDATE `users` SET `password` = '$password', `salt` = '$salt' WHERE `username` = '$displayname'");
 header('Location: ./admin-pass.php');
+exit();
 }
 else{
 setcookie("noexist", "true", time()+60, '/');
 header('Location: ./admin-pass.php');
-
+exit();
 }
 ?>
 

@@ -24,7 +24,6 @@ $new_building = mysqli_query($connect, "INSERT into properties (`development`, `
 $newbuilding = true;
 }
 
-
 }
 
 ?>
@@ -78,7 +77,6 @@ $newbuilding = true;
 		<select name="dev_id" class="form-control">
 		<?PHP
 		$developmentlist = mysqli_query($connect, "SELECT * FROM `developments`");
-		echo "<option value=''></option>";
 		while($developmentlistprint = mysqli_fetch_array($developmentlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $developmentlistprint['dev_id'] . "'>" . $developmentlistprint['dev_name'] . "</option>";
 		}
@@ -92,7 +90,6 @@ $newbuilding = true;
 		<select name="building_name" class="form-control">
 		<?PHP
 		$developmentlist = mysqli_query($connect, "SELECT * FROM `buildings` ORDER BY `buildings`.`building_name` ASC");
-		echo "<option value=''></option>";
 		while($developmentlistprint = mysqli_fetch_array($developmentlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $developmentlistprint['building_name'] . "'>" . $developmentlistprint['building_name'] . "</option>";
 		}
@@ -117,9 +114,11 @@ $newbuilding = true;
 	<?PHP
 		require_once('../dbconfig.php');
 		$connect_1 = mysqli_connect($host,$user,$pass,$dbname);
-		$adminlist = mysqli_query($connect_1, "SELECT * FROM `properties`");	
-		while($adminlistprint = mysqli_fetch_array($adminlist, MYSQLI_ASSOC)) {
-		echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>" . $adminlistprint['apt_number'] . " - " . $adminlistprint['building'] . " - " . $adminlistprint['development'] . "</h3></div></div>";
+		$proplist = mysqli_query($connect_1, "SELECT * FROM `properties`");	
+		$row_cnt = $proplist->num_rows;
+				echo "<div class='panel panel-primary'><div style='text-align: center;' class='panel-heading'><h3 class='panel-title'>Number of properties: " . $row_cnt . "</h3></div></div>";
+		while($proplistprint = mysqli_fetch_array($proplist, MYSQLI_ASSOC)) {
+		echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>" . $proplistprint['apt_number'] . " - " . $proplistprint['building'] . " - " . $proplistprint['development'] . "</h3></div></div>";
 		}
 	?>
 

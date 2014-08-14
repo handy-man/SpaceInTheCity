@@ -74,7 +74,6 @@ $newbuilding = true;
 		<select name="dev_id" class="form-control">
 		<?PHP
 		$developmentlist = mysqli_query($connect, "SELECT * FROM `developments`");
-		echo "<option value=''></option>";
 		while($developmentlistprint = mysqli_fetch_array($developmentlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $developmentlistprint['dev_id'] . "'>" . $developmentlistprint['dev_name'] . "</option>";
 		}
