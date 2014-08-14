@@ -33,7 +33,7 @@ require("../core/navigation.php");
     <div class="container">
       <!-- Main component for a primary marketing message or call to action -->
 	      <div class="jumbotron">
-		<p>ERROR, Something went wrong. Please try to login again or contact the office.</p>
+		<p>ERROR, Something went wrong. Please try to <a href="../login.php">login</a> again or contact the office.</p>
       </div>
 	
 	

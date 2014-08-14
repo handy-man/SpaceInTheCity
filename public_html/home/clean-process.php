@@ -69,9 +69,9 @@ $clean_id = $row['ID'];
 
 if($photos_exist != 1){
 setcookie("cleaningsubmitted", "true", time()+60, '/');
-header('Location: ' . $home . '/home/index.php');
+header('Location: ./index.php');
 }
 else{
-header('Location: ' . $home . '/home/clean-photo.php?cid=' . $clean_id . '');
+header('Location: ./clean-photo.php?cid=' . $clean_id . '');
 }
  ?>
