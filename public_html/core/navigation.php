@@ -44,6 +44,32 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 			
 			echo "<a href='" . $home . "/home/index.php'>Home</a></li>";
 			
+						if ($activePage == "user-settings.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+			
+			echo "<a href='" . $home . "/home/user-settings.php'>Settings</a></li>";
+			
+			if ($_SESSION['admin'] == 1){
+			if ($activePage == "status.php")
+			{
+			
+				  echo "<li class='active'>";
+			}
+			else
+			{
+			echo "<li>";
+			}
+			
+			echo "<a href='" . $home . "/home/status.php'>Daily reports</a></li>";
+			
+			}
+			
 			if ($_SESSION['admin'] == 2){
 			
 									echo "<li class='dropdown'>
