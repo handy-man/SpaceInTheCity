@@ -20,6 +20,10 @@ if(isset($_FILES['files'])){
         if($file_size > 2097152){
 			$errors[]='File size must be less than 2 MB';
         }		
+		
+		if($file_size <= 1){
+			$errors[]='Please upload something or click finish.';
+        }		
         $query="INSERT into clean_photos (`CID`,`FILE_NAME`,`FILE_SIZE`,`FILE_TYPE`) VALUES('$clean_id','$file_name','$file_size','$file_type'); ";
         $desired_dir="./photos";
         if(empty($errors)==true){
