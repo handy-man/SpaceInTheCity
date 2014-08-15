@@ -66,6 +66,7 @@ setcookie("cleaningsubmitted", "true", time()+60, '/');
 header('Location: ./index.php');
 }
 else{
+setcookie("cleaningsubmitted", "true", time()+600, '/');
 header('Location: ./clean-photo.php?cid=' . $clean_id . '');
 }
  ?>
