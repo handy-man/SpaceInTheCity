@@ -17,7 +17,6 @@ $apt_number = $row['apt_number'];
 $building = $row['building'];
 $development_id = $row['development'];
 $status = $row['enabled'];
-
 }
 
 if (isset($_POST['delete']) && isset($_POST['PID'])){
@@ -32,7 +31,17 @@ elseif($delete == "false"){
 $update = mysqli_query($connect, "UPDATE `properties` SET `enabled` = '1' WHERE `ID` = '$PID'");
 $status = 1;
 }
+}
 
+if (isset($_POST['dev_id'])){
+$dev_id = $_POST['dev_id'];
+$building_name = $_POST['building_name'];
+$apt_number = $_POST['apt_number'];
+$dev_id = mysqli_real_escape_string($connect, $dev_id); //Shouldn't really have to do this, our admins can be trusted right?
+$building_name = mysqli_real_escape_string($connect, $building_name); //Shouldn't really have to do this, our admins can be trusted right?
+$apt_number = mysqli_real_escape_string($connect, $apt_number); //Shouldn't really have to do this, our admins can be trusted right?
+$update = mysqli_query($connect, "UPDATE `properties` SET `development` = '$dev_id', `building` = '$building_name', `apt_number` = '$apt_number' WHERE `ID` = '$PID'");
+$updated = true;
 }
 
 ?>
@@ -64,8 +73,8 @@ $status = 1;
 	?>
     <div class="container">
 	<?PHP
-		if($newbuilding == true){
-			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success details updated.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+		if($updated == true){
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success details updated. Refresh to see changes.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
 		}
 		
 		if($delete == "true"){
@@ -82,7 +91,7 @@ $status = 1;
       <!-- Main component for a primary marketing message or call to action -->
 
 	  
-		<form class="form-signin" name="form1" role="form" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+		<form class="form-signin" name="form1" role="form" method="post" action="<?php echo $_SERVER["PHP_SELF"] . "?PID=" . $_GET['PID']; ?>">
 
 		<div style="margin-bottom: 10px;" class="input-group input-group-sm">
 		<span class="input-group-addon">Development</span>
