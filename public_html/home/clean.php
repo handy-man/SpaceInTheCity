@@ -90,7 +90,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		<span class="input-group-addon">Who is with you?</span>
 		<select name="hk_3" class="form-control">
 		<?PHP
-		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2' AND `ID` != '$user_id'  ORDER BY `username` ASC");
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2' AND `ID` != '$user_id' AND `enabled` = '1'  ORDER BY `username` ASC");
 		echo "<option value=''></option>";
 		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
@@ -104,7 +104,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		<span class="input-group-addon">Who is with you?</span>
 		<select name="hk_4" class="form-control">
 		<?PHP
-		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id'  ORDER BY `username` ASC");
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` != '2'  AND `ID` != '$user_id' AND `enabled` = '1'  ORDER BY `username` ASC");
 		echo "<option value=''></option>";
 		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $userlistprint['ID'] . "'>" . $userlistprint['username'] . "</option>";
