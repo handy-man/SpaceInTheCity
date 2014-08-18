@@ -6,22 +6,31 @@ require('../dbconfig.php');
 $connect = mysqli_connect($host,$user,$pass,$dbname);
 
 
-if (isset($_POST['dev_id'])){
-$dev_id = $_POST['dev_id'];
-$building_name = $_POST['building_name'];
-$apt_number = $_POST['apt_number'];
-$dev_id = mysqli_real_escape_string($connect, $dev_id); //Shouldn't really have to do this, our admins can be trusted right?
-$building_name = mysqli_real_escape_string($connect, $building_name); //Shouldn't really have to do this, our admins can be trusted right?
-$apt_number = mysqli_real_escape_string($connect, $apt_number); //Shouldn't really have to do this, our admins can be trusted right?
-$check = mysqli_query($connect, "SELECT * FROM `properties` WHERE `development` = '$dev_id' AND `building` = '$building_name' AND `apt_number` = '$apt_number'");	
-$result = mysqli_num_rows($check);
+if (isset($_GET['PID'])){
+$PID = $_GET['PID'];
+$PID = mysqli_real_escape_string($connect, $PID);
 
-if ($result == 1){	
-$alreadyexist = true;
+$grabdetails = mysqli_query($connect, "SELECT * FROM `properties` WHERE `ID` = '$PID'");
+
+$row = $grabdetails->fetch_array(MYSQLI_ASSOC);
+$apt_number = $row['apt_number'];
+$building = $row['building'];
+$development_id = $row['development'];
+$status = $row['enabled'];
+
 }
-else{
-$new_building = mysqli_query($connect, "INSERT into properties (`development`, `building`, `apt_number`) VALUES ('$dev_id', '$building_name', '$apt_number')");
-$newbuilding = true;
+
+if (isset($_POST['delete']) && isset($_POST['PID'])){
+$PID = $_POST['PID'];
+$delete = $_POST['delete'];
+//Delete is actually disable.
+if ($delete == "true"){
+$update = mysqli_query($connect, "UPDATE `properties` SET `enabled` = '0' WHERE `ID` = '$PID'");
+$status = 0;
+}
+elseif($delete == "false"){
+$update = mysqli_query($connect, "UPDATE `properties` SET `enabled` = '1' WHERE `ID` = '$PID'");
+$status = 1;
 }
 
 }
@@ -56,16 +65,19 @@ $newbuilding = true;
     <div class="container">
 	<?PHP
 		if($newbuilding == true){
-			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success new property added<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success details updated.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
 		}
 		
-				if($alreadyexist == true){
-			echo "<div style='text-align: center; margin: auto;' class='alert alert-danger fade in hints'>That property already exists!<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+		if($delete == "true"){
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success property disabled.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
 		}
-	
+		elseif($delete == "false"){
+						echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success property enabled.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+		}
 	?>
 	<div class="page-header">
-		<h1>Property manager  <small>Register a new property</small></h1>
+		<h1>Property editor <small>Edit property details</small></h1>
+		<h5>You are editing the property: <?PHP echo $apt_number . " - " . $building; ?></h5>
 	</div>
       <!-- Main component for a primary marketing message or call to action -->
 
@@ -78,7 +90,12 @@ $newbuilding = true;
 		<?PHP
 		$developmentlist = mysqli_query($connect, "SELECT * FROM `developments`");
 		while($developmentlistprint = mysqli_fetch_array($developmentlist, MYSQLI_ASSOC)) {
+		if ($developmentlistprint['dev_id'] != $development_id){
 		echo "<option value='" . $developmentlistprint['dev_id'] . "'>" . $developmentlistprint['dev_name'] . "</option>";
+		}
+		else{
+		echo "<option value='" . $developmentlistprint['dev_id'] . "' selected>" . $developmentlistprint['dev_name'] . "</option>";
+		}
 		}
 		
 		?>
@@ -91,7 +108,12 @@ $newbuilding = true;
 		<?PHP
 		$developmentlist = mysqli_query($connect, "SELECT * FROM `buildings` ORDER BY `buildings`.`building_name` ASC");
 		while($developmentlistprint = mysqli_fetch_array($developmentlist, MYSQLI_ASSOC)) {
+		if ($developmentlistprint['building_name'] != $building){
 		echo "<option value='" . $developmentlistprint['building_name'] . "'>" . $developmentlistprint['building_name'] . "</option>";
+		}
+		else{
+		echo "<option value='" . $developmentlistprint['building_name'] . "' selected>" . $developmentlistprint['building_name'] . "</option>";
+		}
 		}
 		
 		?>
@@ -100,26 +122,23 @@ $newbuilding = true;
 		
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon"><span>Development</span></span>
-        <input name="apt_number" id="apt_number" data-toggle="tooltip" data-placement="right" title="" data-original-title="Apartment number" type="text" class="form-control" placeholder="Apartment number" required>
+        <input name="apt_number" id="apt_number" data-toggle="tooltip" data-placement="right" title="" data-original-title="Apartment number" type="text" class="form-control" placeholder="Apartment number" required value="<?PHP echo $apt_number; ?>">
 		</div>
 		
 		
 		<div  style="margin-bottom: 10px;"></div>
 		
-		<button class='btn btn-lg btn-success btn-block' type='submit'>Add a new property</button>
+		<button class='btn btn-lg btn-success btn-block' type='submit'>Save property details</button>
 		<div  style="margin-bottom: 15px;"></div>
 		
       </form>
 	  
-	<?PHP
-		$proplist = mysqli_query($connect, "SELECT * FROM `properties`");	
-		$row_cnt = $proplist->num_rows;
-				echo "<div class='panel panel-primary'><div style='text-align: center;' class='panel-heading'><h3 class='panel-title'>Number of properties: " . $row_cnt . "</h3></div></div>";
-		while($proplistprint = mysqli_fetch_array($proplist, MYSQLI_ASSOC)) {
-		echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href='property-editor.php?PID=" . $proplistprint['ID'] . "'>" . $proplistprint['apt_number'] . " - " . $proplistprint['building'] . " - " . $proplistprint['development'] . "</a>
-		</h3></div></div>";
-		}
-	?>
+	  <form class="form-signin" name="form2" role="form" method="post" action="<?php echo $_SERVER["PHP_SELF"] . "?PID=" . $_GET['PID']; ?>">
+	  
+	  <input type="hidden" name="delete" value="<?PHP if($status == 1){echo "true";}else{echo "false";} ?>">
+	  <input type="hidden" name="PID" value="<?PHP echo $_GET['PID']; ?>">
+	  		<button class='btn btn-lg btn-danger btn-block' type='submit'><?PHP if($status == 1){echo "Disable";}else{echo "Enable";} ?> this property</button>
+	  </form>
 
     </div> <!-- /container -->
 	
