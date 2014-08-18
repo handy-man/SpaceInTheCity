@@ -53,7 +53,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		
 		$building = $_GET['b'];
 		$building = mysqli_real_escape_string($connect, $building);
-		$propertylist = mysqli_query($connect, "SELECT `ID`, `apt_number`, `building` FROM `properties` WHERE `building` = '$building' ORDER BY `apt_number` ASC");
+		$propertylist = mysqli_query($connect, "SELECT `ID`, `apt_number`, `building` FROM `properties` WHERE `building` = '$building' AND `enabled` = '1' ORDER BY `apt_number` ASC");
 		
 		while($propertylistprint = mysqli_fetch_array($propertylist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $propertylistprint['ID'] . "'>" . $propertylistprint['building'] . " " . $propertylistprint['apt_number'] . "</option>";

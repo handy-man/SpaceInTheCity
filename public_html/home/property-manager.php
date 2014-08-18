@@ -114,9 +114,15 @@ $newbuilding = true;
 	<?PHP
 		$proplist = mysqli_query($connect, "SELECT * FROM `properties`");	
 		$row_cnt = $proplist->num_rows;
-				echo "<div class='panel panel-primary'><div style='text-align: center;' class='panel-heading'><h3 class='panel-title'>Number of properties: " . $row_cnt . "</h3></div></div>";
+		echo "<div class='panel panel-primary'><div style='text-align: center;' class='panel-heading'><h3 class='panel-title'>Number of properties: " . $row_cnt . "</h3></div></div>";
 		while($proplistprint = mysqli_fetch_array($proplist, MYSQLI_ASSOC)) {
-		echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'><a href='property-editor.php?PID=" . $proplistprint['ID'] . "'>" . $proplistprint['apt_number'] . " - " . $proplistprint['building'] . " - " . $proplistprint['development'] . "</a>
+		if($proplistprint['enabled'] == 1){
+		$panel_type = "panel-primary";
+		}
+		else{
+		$panel_type = "panel-warning";
+		}
+		echo "<div class='panel " .  $panel_type . "'><div class='panel-heading'><h3 class='panel-title'><a href='property-editor.php?PID=" . $proplistprint['ID'] . "'>" . $proplistprint['apt_number'] . " - " . $proplistprint['building'] . " - " . $proplistprint['development'] . "</a>
 		</h3></div></div>";
 		}
 	?>
