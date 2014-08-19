@@ -41,7 +41,7 @@ require("./core/functions.php");
 	</div>
 	
 
-		<a href="./login.php"><span class='label center-block label-primary large-button'>Please login</span></a>
+		<a href="<?PHP echo $home . "login.php"; ?>"><span class='label center-block label-primary large-button'>Please login</span></a>
 	
 	
     </div> <!-- /container -->

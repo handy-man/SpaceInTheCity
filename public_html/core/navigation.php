@@ -85,7 +85,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				   echo "<a href='./admin-new.php'>New user</a></li>";
+				   echo "<a href='" . $home . "/home/admin-new.php'>New user</a></li>";
 				   
 				   		if ($activePage == "admin-edit.php")
 		  {
@@ -96,7 +96,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				  echo "<a href='./admin-edit.php'>Admin manager</a></li>";
+				  echo "<a href='" . $home . "/home/admin-edit.php'>Admin manager</a></li>";
 				  
 				   
 				   		if ($activePage == "admin-pass.php")
@@ -108,7 +108,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				   echo "<a href='./admin-pass.php'>Password changer</a></li>
+				   echo "<a href='" . $home . "/home/admin-pass.php'>Password changer</a></li>
 				</ul>
             </li>";
 		
@@ -126,7 +126,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				   echo "<a href='./building-manager.php'>Building management</a></li>";
+				   echo "<a href='" . $home . "/home/building-manager.php'>Building management</a></li>";
 				   
 				   		if ($activePage == "development-manager.php")
 		  {
@@ -137,7 +137,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				  echo "<a href='./development-manager.php'>Development manager</a></li>";
+				  echo "<a href='" . $home . "/home/development-manager.php'>Development manager</a></li>";
 				  
 				   
 				   		if ($activePage == "property-manager.php")
@@ -149,7 +149,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				   echo "<a href='./property-manager.php'>Property manager</a></li>
+				   echo "<a href='" . $home . "/home/property-manager.php'>Property manager</a></li>
 				</ul>
             </li>
 		";
@@ -167,7 +167,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				   echo "<a href='./status.php'>Status</a></li>";
+				   echo "<a href='" . $home . "/home/status.php'>Status</a></li>";
 				   
 	
 				   
