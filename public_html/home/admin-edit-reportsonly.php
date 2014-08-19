@@ -84,7 +84,7 @@ $noadmins = true;
 		<select name="admin_email" class="form-control">
 		<?PHP
 	
-		$userlist = mysqli_query($connect, "SELECT `ID`, `username`, `enabled` FROM `users` WHERE `enabled` = '1' ORDER BY `username` ASC");
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username`, `enabled` FROM `users` WHERE `enabled` = '1' AND `level` != '2' ORDER BY `username` ASC");
 		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $userlistprint['username'] . "'>" . $userlistprint['username'] . "</option>";
 		}

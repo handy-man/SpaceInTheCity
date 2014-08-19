@@ -6,8 +6,8 @@ function admin_only($home){
 	}
 }
 
-function ref_only($home){
-	if ($_SESSION['admin'] >= 1){
+function reports_only($home){
+	if ($_SESSION['admin'] < 1){
 	header('Location: ' . $home . '/home/no-auth.php');
 	}
 }

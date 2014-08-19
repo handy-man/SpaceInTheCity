@@ -1,8 +1,9 @@
-<?PHP require('adminonly.php');
+<?PHP
+require('../includes/session.php');
 require('../config.php');
 require('../core/navigation.php');
 require('../core/functions.php');
-
+reports_only($home);
 require('../dbconfig.php');
 $connect = mysqli_connect($host,$user,$pass,$dbname);
  ?>
