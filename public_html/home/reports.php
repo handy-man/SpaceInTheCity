@@ -11,6 +11,7 @@ if (isset($_COOKIE['reportdeleted'])){
 $reportdeleted = true;
 setcookie("reportdeleted", "true", time()-3600, '/');
 }
+$connect = mysqli_connect($host,$user,$pass,$dbname);
 
 ?>
 <!DOCTYPE html>
@@ -86,97 +87,17 @@ setcookie("reportdeleted", "true", time()-3600, '/');
 	?>
 	
 	<div class="page-header">
-		<h1>Cleaning reports <small>Click the title for detailed information</small></h1><form action="<?PHP $_SERVER['PHP_SELF']; ?>" method="post">
-    <div class="input-group">
-			<span class="input-group-btn">
-			<button class="btn btn-default" type="submit">Filter</button>
-			</span>
-		<input type="text" class="form-control datepicker-input" name="datepicker" id="datepicker" size="30" value="<?PHP if (!isset($_POST['datepicker'])){$curdate = curdate(); echo $curdate; } else { echo $_POST['datepicker']; }  ?>">
-	</div>
-	</form>
-	</div>
-	
-	<?PHP
-	$connect = mysqli_connect($host,$user,$pass,$dbname);
-	if (!isset($_POST['datepicker'])){
-	$curdate = curdate();
-	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `notes`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo` FROM `clean` WHERE `dateofclean` = '$curdate' ORDER BY `apt_id` ASC ");	
-	while($cleansprint = mysqli_fetch_array($cleans, MYSQLI_ASSOC)) {
-	$clean_id = $cleansprint['ID'];
-	$propertyid = $cleansprint['apt_id'];
-	$property_details = getaptdetails($connect, $propertyid);
-	$housekeeper1 = $cleansprint['HK1'];
-	$housekeeper1name = gethousekeepername($connect, $housekeeper1);
-	$housekeeper2 = $cleansprint['HK2'];
-	$housekeeper2name = gethousekeepername($connect, $housekeeper2);
-	$housekeeper3 = $cleansprint['HK3'];
-	$housekeeper3name = gethousekeepername($connect, $housekeeper3);
-	$housekeeper4 = $cleansprint['HK4'];
-	$housekeeper4name = gethousekeepername($connect, $housekeeper4);
-	$typeofclean = $cleansprint['typeofclean'];
-	if ($cleansprint['notes'] == ""){
-	$extranotesbool = "None";
-	}
-	else{
-	$extranotesbool = "Yes";
-	}
-	
-	if ($cleansprint['photo'] == ""){
-	$photobool = "None";
-	}
-	else{
-	$photobool = "Yes";
-	}
-	echo "<div class='panel panel-primary report-display'>
-  <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'><a href='./clean-details.php?cid=" . $clean_id . "'>" . $property_details ."</a></div>
-  <ul class='list-group'>
-    <li class='list-group-item'>" . $housekeeper1name . " " . $housekeeper2name . " " . $housekeeper3name . " " . $housekeeper4name . "</li>
-    <li class='list-group-item list-title'>Clean: " . $typeofclean . " Extra notes: " . $extranotesbool . " photos: " . $photobool . "</li>
-    <li class='list-group-item'>Start: " . $cleansprint['start_hh'] . ":" . $cleansprint['start_mm'] . " End: " . $cleansprint['end_hh'] . ":" . $cleansprint['end_mm'] . "</li>
-  </ul>
-	</div>";
-	}//End of while
-	}
-	else{
-	$curdate = $_POST['datepicker'];
-	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `notes`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo` FROM `clean` WHERE `dateofclean` = '$curdate' ORDER BY `apt_id` ASC ");	
-	while($cleansprint = mysqli_fetch_array($cleans, MYSQLI_ASSOC)) {
-	$clean_id = $cleansprint['ID'];
-	$propertyid = $cleansprint['apt_id'];
-	$property_details = getaptdetails($connect, $propertyid);
-	$housekeeper1 = $cleansprint['HK1'];
-	$housekeeper1name = gethousekeepername($connect, $housekeeper1);
-	$housekeeper2 = $cleansprint['HK2'];
-	$housekeeper2name = gethousekeepername($connect, $housekeeper2);
-	$housekeeper3 = $cleansprint['HK3'];
-	$housekeeper3name = gethousekeepername($connect, $housekeeper3);
-	$housekeeper4 = $cleansprint['HK4'];
-	$housekeeper4name = gethousekeepername($connect, $housekeeper4);
-	$typeofclean = $cleansprint['typeofclean'];
-	if ($cleansprint['notes'] == ""){
-	$extranotesbool = "None";
-	}
-	else{
-	$extranotesbool = "Yes";
-	}
-	
-	if ($cleansprint['photo'] == ""){
-	$photobool = "None";
-	}
-	else{
-	$photobool = "Yes";
-	}
-	echo "<div class='panel panel-primary report-display'>
-  <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'><a href='./clean-details.php?cid=" . $clean_id . "'>" . $property_details ."</a></div>
-  <ul class='list-group'>
-    <li class='list-group-item'>" . $housekeeper1name . " " . $housekeeper2name . " " . $housekeeper3name . " " . $housekeeper4name . "</li>
-    <li class='list-group-item list-title'>Clean: " . $typeofclean . " Extra notes: " . $extranotesbool . " photos: " . $photobool . "</li>
-    <li class='list-group-item'>Start: " . $cleansprint['start_hh'] . ":" . $cleansprint['start_mm'] . " End: " . $cleansprint['end_hh'] . ":" . $cleansprint['end_mm'] . "</li>
-  </ul>
-	</div>";
-	}
-	}
-	?>
+		<h1>Cleaning reports by apartment. <small>Click the title for detailed information</small></h1>
+		<?PHP
+		$proplist = mysqli_query($connect, "SELECT * FROM `properties` WHERE `enabled` = '1'");	
+		$row_cnt = $proplist->num_rows;
+		echo "<div class='panel panel-primary'><div style='text-align: center;' class='panel-heading'><h3 class='panel-title'>Number of properties: " . $row_cnt . "</h3></div></div>";
+		while($proplistprint = mysqli_fetch_array($proplist, MYSQLI_ASSOC)) {
+		$panel_type = "panel-primary";
+		echo "<div class='panel " .  $panel_type . "'><div class='panel-heading'><h3 class='panel-title'><a href='reports-cleaning.php?PID=" . $proplistprint['ID'] . "'>" . $proplistprint['apt_number'] . " - " . $proplistprint['building'] . " - " . $proplistprint['development'] . "</a>
+		</h3></div></div>";
+		}
+		?>
 	
     </div> <!-- /container -->
 	
