@@ -109,7 +109,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 				   
 		echo "<a href='" . $home . "/home/admin-user-manager.php'>User manager</a></li>";
 				   
-				   		if ($activePage == "admin-edit.php")
+				   		if ($activePage == "admin-edit-reportsonly.php")
 		  {
 		  echo "<li class='active'>";
 		  }
@@ -118,7 +118,18 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				  echo "<a href='" . $home . "/home/admin-edit.php'>Admin manager</a></li>";
+				  echo "<a href='" . $home . "/home/admin-edit-reportsonly.php'>Reports admin manager</a></li>";
+				  
+			if ($activePage == "admin-edit.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+			echo "<a href='" . $home . "/home/admin-edit.php'>Admin manager</a></li>";
 				  
 				   
 				   		if ($activePage == "admin-pass.php")

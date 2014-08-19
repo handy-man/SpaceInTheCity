@@ -11,7 +11,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
   <head>
 <?PHP include($home . "/includes/meta.html");  ?> 
 
-    <title>Admin manager - Create or remove admins</title>
+    <title>Reports manager - Create or remove report status</title>
 	
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -31,17 +31,17 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 if (isset($_POST['admin_email'])){
 $admin_email = $_POST['admin_email'];
 $admin_email = mysqli_real_escape_string($connect, $admin_email); //Shouldn't really have to do this, our admins can be trusted right?
-$check = mysqli_query($connect, "SELECT * FROM `users` WHERE `username` = '$admin_email' AND `level` != '2'");	
+$check = mysqli_query($connect, "SELECT * FROM `users` WHERE `username` = '$admin_email' AND `level` != '1'");	
 $result = mysqli_num_rows($check);
 
-$anyadmins = mysqli_query($connect, "SELECT * FROM `users` WHERE `level` = '2' LIMIT 0, 30 ");	
+$anyadmins = mysqli_query($connect, "SELECT * FROM `users` WHERE `level` = '1' LIMIT 0, 30 ");	
 $anyadmin_result = mysqli_num_rows($anyadmins);
 //Anyadmin is used to check if we still have an admin, if we don't DO NOT ALLOW REMOVAL! (no admins is bad)
 if ($result == 1){
-$update = mysqli_query($connect, "UPDATE `users` SET `level` = '2' WHERE `username` = '$admin_email'");
+$update = mysqli_query($connect, "UPDATE `users` SET `level` = '1' WHERE `username` = '$admin_email'");
 $adminchange = 1;
 }
-else if ($anyadmin_result > 1){
+else if ($anyadmin_result >= 1){
 $update = mysqli_query($connect, "UPDATE `users` SET `level` = '0' WHERE `username` = '$admin_email'"); //not sure if should give to most people.
 $adminchange = 2;
 }
@@ -84,7 +84,7 @@ $noadmins = true;
 		<select name="admin_email" class="form-control">
 		<?PHP
 	
-		$userlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` ORDER BY `username` ASC");
+		$userlist = mysqli_query($connect, "SELECT `ID`, `username`, `enabled` FROM `users` WHERE `enabled` = '1' ORDER BY `username` ASC");
 		while($userlistprint = mysqli_fetch_array($userlist, MYSQLI_ASSOC)) {
 		echo "<option value='" . $userlistprint['username'] . "'>" . $userlistprint['username'] . "</option>";
 		}
@@ -100,9 +100,7 @@ $noadmins = true;
 <p>Current list of HK report access:</p>
 
 <?PHP
-require_once('../dbconfig.php');
-$connect_1 = mysqli_connect($host,$user,$pass,$dbname);
-$adminlist = mysqli_query($connect_1, "SELECT * FROM `users` WHERE `level` == '1' LIMIT 0, 30 ");	
+$adminlist = mysqli_query($connect, "SELECT `ID`, `username` FROM `users` WHERE `level` = '1'");	
 while($adminlistprint = mysqli_fetch_array($adminlist, MYSQLI_ASSOC)) {
 echo "<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>" . $adminlistprint['username'] . "</h3></div></div>";
 }
