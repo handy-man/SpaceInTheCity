@@ -5,7 +5,7 @@ require("../includes/session.php");
 require("../core/navigation.php");
 require("../core/functions.php");
 
-user_only($home);
+reports_only($home);
 
 if (isset($_COOKIE['reportdeleted'])){
 $reportdeleted = true;

@@ -8,11 +8,11 @@ $adminLevel = $_SESSION['admin'];
 	}
 	else{
 	setcookie("directattempt", "true", time()+60);
-	header('Location: ' . $home . '/');
+	header('Location: ' . $home . '/home/no-auth.php');
 	}
 }
 else{
 setcookie("directattempt", "true", time()+60);
-header('Location: ' . $home . '/');
+header('Location: ' . $home . '/home/no-auth.php');
 }
 ?>
