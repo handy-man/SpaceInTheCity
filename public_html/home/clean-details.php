@@ -139,8 +139,14 @@ $photosexist = $row['photo'];
 	}
 	?>
 	
-	
-	
+	<div class="page-header">
+		<h1>Actions  <small>Action this report below</small></h1>
+	</div>
+	<form action="./clean-details-action.php" method="post">
+		<input type="hidden" name="CID" value="<?PHP echo $_GET['cid']; ?>">
+		<input type="hidden" name="action" value="delete">
+		<button style="margin-top: 20px;" class='btn btn-lg btn-danger btn-block' type='submit'>Delete report</button>
+	</form>
 	</ul>
 	</P>
 	

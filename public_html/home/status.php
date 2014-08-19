@@ -6,6 +6,12 @@ require("../core/navigation.php");
 require("../core/functions.php");
 
 user_only($home);
+
+if (isset($_COOKIE['reportdeleted'])){
+$reportdeleted = true;
+setcookie("reportdeleted", "true", time()-3600, '/');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,6 +77,13 @@ user_only($home);
 		
 		
     <div class="container">
+	
+		<?PHP
+		if($reportdeleted == true){
+			echo "<div style='text-align: center; margin: auto;' class='alert alert-success fade in hints'>Success report deleted.<a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a> </div>";
+		}
+	
+	?>
 	
 	<div class="page-header">
 		<h1>Cleaning reports <small>Click the title for detailed information</small></h1><form action="<?PHP $_SERVER['PHP_SELF']; ?>" method="post">
