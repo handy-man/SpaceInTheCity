@@ -66,7 +66,7 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 			echo "<li>";
 			}
 			
-			echo "<a href='" . $home . "/home/status.php'>Daily reports</a></li>";
+			echo "<a href='" . $home . "/home/status.php'>Reports by Date</a></li>";
 			
 			if ($activePage == "admin-user-manager.php")
 			{
@@ -200,7 +200,18 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				   echo "<a href='" . $home . "/home/status.php'>Status</a></li>";
+				   echo "<a href='" . $home . "/home/status.php'>Reports by Date</a></li>";
+				   
+		if ($activePage == "reports.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+				   echo "<a href='" . $home . "/home/reports.php'>Reports by property</a></li>";
 				   
 	
 				   
