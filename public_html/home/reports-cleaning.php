@@ -94,7 +94,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 		<h1>Cleaning report for <small><?PHP echo $property_details; ?></small></h1>
 		<?PHP		
 		
-	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `notes`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo` FROM `clean` WHERE `apt_id` = '$prop_clean_id'");	
+	$cleans = mysqli_query($connect, "SELECT `ID`, `apt_id`, `HK1`, `HK2`, `HK3`, `HK4`, `typeofclean`, `notes`, `start_hh`, `start_mm`, `end_hh`, `end_mm`, `photo`, `dateofclean` FROM `clean` WHERE `apt_id` = '$prop_clean_id'");	
 	while($cleansprint = mysqli_fetch_array($cleans, MYSQLI_ASSOC)) {
 	$clean_id = $cleansprint['ID'];
 	$propertyid = $cleansprint['apt_id'];
@@ -122,7 +122,7 @@ $connect = mysqli_connect($host,$user,$pass,$dbname);
 	$photobool = "Yes";
 	}
 	echo "<div class='panel panel-primary report-display'>
-  <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'><a href='./clean-details.php?cid=" . $clean_id . "'>" . $property_details ."</a></div>
+  <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'>" . $cleansprint['dateofclean'] . " - <a href='./clean-details.php?cid=" . $clean_id . "'>" . $property_details ."</a></div>
   <ul class='list-group'>
     <li class='list-group-item'>" . $housekeeper1name . " " . $housekeeper2name . " " . $housekeeper3name . " " . $housekeeper4name . "</li>
     <li class='list-group-item list-title'>Clean: " . $typeofclean . " Extra notes: " . $extranotesbool . " photos: " . $photobool . "</li>
