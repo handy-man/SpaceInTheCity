@@ -78,7 +78,7 @@ setcookie("reallybaduser", "true", time()-3600, '/');
 	}
 	
 			if (isset($baduser)){
-		echo "<div style='text-align: center; margin: auto;' class='alert alert-danger fade in hints'>Username or password incorrect. Talk to Manager.</div>";
+		echo "<div style='text-align: center; margin: auto;' class='alert alert-danger fade in hints'>Username or password incorrect, talk to manager.</div>";
 	}
 	
 				if (isset($nope)){
@@ -109,7 +109,7 @@ setcookie("reallybaduser", "true", time()-3600, '/');
         <input name="p" id="p" type="password" class="form-control" placeholder="Password" required>
 		</div>
 		<div style="margin-bottom: 10px;"></div>
-				<?PHP
+		<?PHP
 		if ($login_enabled == true){
 		echo "<button class='btn btn-lg btn-primary btn-block' type='submit'>Sign in</button>";
 		}

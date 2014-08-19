@@ -19,7 +19,7 @@ $saltgrab_array = mysqli_fetch_array($saltgrab);
 $salt = $saltgrab_array['salt'];
 $mypass = crypt($mypassword, $salt);
 //More mysql stuff
-$check = mysqli_query($connect, "SELECT * FROM `users` WHERE `username` = '$myusername' AND `password` = '$mypass' LIMIT 0, 1");	
+$check = mysqli_query($connect, "SELECT * FROM `users` WHERE `username` = '$myusername' AND `password` = '$mypass' AND `enabled` = '1' LIMIT 0, 1");	
 $result = mysqli_num_rows($check);
 if ($result == 1) {
 //Grab variables from our databse check and redirect them to their profile.

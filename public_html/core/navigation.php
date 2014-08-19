@@ -68,6 +68,17 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 			
 			echo "<a href='" . $home . "/home/status.php'>Daily reports</a></li>";
 			
+			if ($activePage == "admin-user-manager.php")
+			{
+			echo "<li class='active'>";
+			}
+			else
+			{
+			echo "<li>";
+			}
+				   
+				   echo "<a href='" . $home . "/home/admin-user-manager.php'>User manager</a></li>";
+			
 			}
 			
 			if ($_SESSION['admin'] == 2){
@@ -85,7 +96,18 @@ echo "<div class='navbar navbar-default navbar-fixed-top' role='navigation'><div
 		  echo "<li>";
 		  }
 				   
-				   echo "<a href='" . $home . "/home/admin-new.php'>New user</a></li>";
+			echo "<a href='" . $home . "/home/admin-new.php'>New user</a></li>";
+			
+		if ($activePage == "admin-user-manager.php")
+		  {
+		  echo "<li class='active'>";
+		  }
+		  else
+		  {
+		  echo "<li>";
+		  }
+				   
+		echo "<a href='" . $home . "/home/admin-user-manager.php'>User manager</a></li>";
 				   
 				   		if ($activePage == "admin-edit.php")
 		  {
