@@ -15,6 +15,7 @@ $grabdetails = mysqli_query($connect, "SELECT * FROM `properties` WHERE `ID` = '
 $row = $grabdetails->fetch_array(MYSQLI_ASSOC);
 $apt_number = $row['apt_number'];
 $building = $row['building'];
+$apt_type = $row['type'];
 $development_id = $row['development'];
 $status = $row['enabled'];
 }
@@ -36,11 +37,13 @@ $status = 1;
 if (isset($_POST['dev_id'])){
 $dev_id = $_POST['dev_id'];
 $building_name = $_POST['building_name'];
+$apt_type = $_POST['apt_type'];
 $apt_number = $_POST['apt_number'];
-$dev_id = mysqli_real_escape_string($connect, $dev_id); //Shouldn't really have to do this, our admins can be trusted right?
-$building_name = mysqli_real_escape_string($connect, $building_name); //Shouldn't really have to do this, our admins can be trusted right?
-$apt_number = mysqli_real_escape_string($connect, $apt_number); //Shouldn't really have to do this, our admins can be trusted right?
-$update = mysqli_query($connect, "UPDATE `properties` SET `development` = '$dev_id', `building` = '$building_name', `apt_number` = '$apt_number' WHERE `ID` = '$PID'");
+$dev_id = mysqli_real_escape_string($connect, $dev_id);
+$building_name = mysqli_real_escape_string($connect, $building_name);
+$apt_type = mysqli_real_escape_string($connect, $apt_type);
+$apt_number = mysqli_real_escape_string($connect, $apt_number); 
+$update = mysqli_query($connect, "UPDATE `properties` SET `development` = '$dev_id', `building` = '$building_name', `type` = '$apt_type', `apt_number` = '$apt_number' WHERE `ID` = '$PID'");
 $updated = true;
 }
 
@@ -129,8 +132,26 @@ $updated = true;
 		</select>
 		</div>
 		
+				<div style="margin-bottom: 10px;" class="input-group input-group-sm">
+		<span class="input-group-addon">Apartment type</span>
+		<select name="apt_type" class="form-control">
+		<?PHP
+		$developmentlist = mysqli_query($connect, "SELECT * FROM `room_type` ORDER BY `room_type`.`type` ASC");
+		while($developmentlistprint = mysqli_fetch_array($developmentlist, MYSQLI_ASSOC)) {
+		if ($developmentlistprint['type'] != $apt_type){
+		echo "<option value='" . $developmentlistprint['type'] . "'>" . $developmentlistprint['type'] . "</option>";
+		}
+		else{
+		echo "<option value='" . $developmentlistprint['type'] . "' selected>" . $developmentlistprint['type'] . "</option>";
+		}
+		}
+		
+		?>
+		</select>
+		</div>
+		
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon"><span>Development</span></span>
+		<span class="input-group-addon"><span>Apartment number</span></span>
         <input name="apt_number" id="apt_number" data-toggle="tooltip" data-placement="right" title="" data-original-title="Apartment number" type="text" class="form-control" placeholder="Apartment number" required value="<?PHP echo $apt_number; ?>">
 		</div>
 		

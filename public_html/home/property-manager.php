@@ -99,7 +99,7 @@ $newbuilding = true;
 		</div>
 		
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon"><span>Development</span></span>
+		<span class="input-group-addon"><span>Apartment Number</span></span>
         <input name="apt_number" id="apt_number" data-toggle="tooltip" data-placement="right" title="" data-original-title="Apartment number" type="text" class="form-control" placeholder="Apartment number" required>
 		</div>
 		
@@ -116,8 +116,11 @@ $newbuilding = true;
 		$row_cnt = $proplist->num_rows;
 		echo "<div class='panel panel-primary'><div style='text-align: center;' class='panel-heading'><h3 class='panel-title'>Number of properties: " . $row_cnt . "</h3></div></div>";
 		while($proplistprint = mysqli_fetch_array($proplist, MYSQLI_ASSOC)) {
-		if($proplistprint['enabled'] == 1){
+		if($proplistprint['enabled'] == 1 && $proplistprint['type'] != ''){
 		$panel_type = "panel-primary";
+		}
+		elseif($proplistprint['type'] == ''){
+		$panel_type = "panel-danger";
 		}
 		else{
 		$panel_type = "panel-warning";
