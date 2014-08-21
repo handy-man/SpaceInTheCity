@@ -12,6 +12,7 @@ $reportdeleted = true;
 setcookie("reportdeleted", "true", time()-3600, '/');
 }
 
+date_default_timezone_set('UTC');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,12 +128,20 @@ setcookie("reportdeleted", "true", time()-3600, '/');
 	else{
 	$photobool = "Yes";
 	}
+	$start_string = $cleansprint['start_hh'] . ":" . $cleansprint['start_mm'];
+	$end_string = $cleansprint['end_hh'] . ":" . $cleansprint['end_mm'];
+	$start_total = strtotime($start_string);
+	$end_total = strtotime($end_string);
+	$diff = $end_total - $start_total;
+	
+	
+	
 	echo "<div class='panel panel-primary report-display'>
   <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'><a href='./clean-details.php?cid=" . $clean_id . "'>" . $property_details ."</a></div>
   <ul class='list-group'>
     <li class='list-group-item'>" . $housekeeper1name . " " . $housekeeper2name . " " . $housekeeper3name . " " . $housekeeper4name . "</li>
     <li class='list-group-item list-title'>Clean: " . $typeofclean . " Extra notes: " . $extranotesbool . " photos: " . $photobool . "</li>
-    <li class='list-group-item'>Start: " . $cleansprint['start_hh'] . ":" . $cleansprint['start_mm'] . " End: " . $cleansprint['end_hh'] . ":" . $cleansprint['end_mm'] . "</li>
+    <li class='list-group-item'>Start: " . $start_string . " End: " . $end_string . " Diff: ".date('H:i', $diff) . "</li>
   </ul>
 	</div>";
 	}//End of while
@@ -166,12 +175,20 @@ setcookie("reportdeleted", "true", time()-3600, '/');
 	else{
 	$photobool = "Yes";
 	}
+	$start_string = $cleansprint['start_hh'] . ":" . $cleansprint['start_mm'];
+	$end_string = $cleansprint['end_hh'] . ":" . $cleansprint['end_mm'];
+	$start_total = strtotime($start_string);
+	$end_total = strtotime($end_string);
+	$diff = $end_total - $start_total;
+	
+	
+	
 	echo "<div class='panel panel-primary report-display'>
   <div class='panel-heading panel-primary' style='text-align: center; text-transform: uppercase;'><a href='./clean-details.php?cid=" . $clean_id . "'>" . $property_details ."</a></div>
   <ul class='list-group'>
     <li class='list-group-item'>" . $housekeeper1name . " " . $housekeeper2name . " " . $housekeeper3name . " " . $housekeeper4name . "</li>
     <li class='list-group-item list-title'>Clean: " . $typeofclean . " Extra notes: " . $extranotesbool . " photos: " . $photobool . "</li>
-    <li class='list-group-item'>Start: " . $cleansprint['start_hh'] . ":" . $cleansprint['start_mm'] . " End: " . $cleansprint['end_hh'] . ":" . $cleansprint['end_mm'] . "</li>
+    <li class='list-group-item'>Start: " . $start_string . " End: " . $end_string . " Diff: ".date('H:i', $diff) . "</li>
   </ul>
 	</div>";
 	}
