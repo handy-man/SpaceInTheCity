@@ -314,17 +314,20 @@ $_SESSION['exit_clean'] = "00:00";
         <thead>
             <tr>
                 <th>Clean type</th>
-                <th>Time taken</th>
+                <th>Time taken (expected)</th>
+                <th>Time taken (actual)</th>
             </tr>
         </thead>
         <tbody>
 			<tr>
 			<td>Service</td>
+			<td><?PHP echo date('H:i',$_SESSION['service_expected']); ?></td>
 			<td><?PHP echo date('H:i',$_SESSION['service_clean']); ?></td>
 			</tr>
 			
 			<tr>
 			<td>Exit</td>
+			<td><?PHP echo date('H:i',$_SESSION['exit_epected']); ?></td>
 			<td><?PHP echo date('H:i',$_SESSION['exit_clean']); ?></td>
 			</tr>
 		</tbody>
