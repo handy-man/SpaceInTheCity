@@ -13,6 +13,8 @@ setcookie("reportdeleted", "true", time()-3600, '/');
 }
 
 date_default_timezone_set('UTC');
+$_SESSION['service_clean'] = "00:00";
+$_SESSION['exit_clean'] = "00:00";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,6 +116,17 @@ date_default_timezone_set('UTC');
 	$housekeeper3name = gethousekeepername($connect, $housekeeper3);
 	$housekeeper4 = $cleansprint['HK4'];
 	$housekeeper4name = gethousekeepername($connect, $housekeeper4);
+	$numberofHK = 1;
+	if ($housekeeper2 != 0){
+	$numberofHK = 2;
+	}
+	if ($housekeeper3 != 0){
+	$numberofHK = 3;
+	}
+	if ($housekeeper4 != 0){
+	$numberofHK = 4;
+	}
+	
 	$typeofclean = $cleansprint['typeofclean'];
 	if ($cleansprint['notes'] == ""){
 	$extranotesbool = "None";
@@ -133,7 +146,52 @@ date_default_timezone_set('UTC');
 	$start_total = strtotime($start_string);
 	$end_total = strtotime($end_string);
 	$diff = $end_total - $start_total;
+	if ($typeofclean = "service"){
+	$service = $_SESSION['service_clean'];
+	if ($numberofHK == 1){
+	$service = $service + $diff; //1 == numberofHK
+	}
+	if ($numberofHK == 2){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+		if ($numberofHK == 3){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+		if ($numberofHK == 4){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+	$_SESSION['service_clean'] = $service;
+	}
+	else if($typeofclean = "exit"){
+	$exit = $_SESSION['exit_clean'];
 	
+		if ($numberofHK == 1){
+	$exit = $exit + $diff; //1 == numberofHK
+	}
+	if ($numberofHK == 2){
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	}
+		if ($numberofHK == 3){
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	}
+		if ($numberofHK == 4){
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	}
+	$_SESSION['exit_clean'] = $exit;
+	
+	}
 	
 	
 	echo "<div class='panel panel-primary report-display'>
@@ -161,6 +219,16 @@ date_default_timezone_set('UTC');
 	$housekeeper3name = gethousekeepername($connect, $housekeeper3);
 	$housekeeper4 = $cleansprint['HK4'];
 	$housekeeper4name = gethousekeepername($connect, $housekeeper4);
+		$numberofHK = 1;
+	if ($housekeeper2 != 0){
+	$numberofHK = 2;
+	}
+	if ($housekeeper3 != 0){
+	$numberofHK = 3;
+	}
+	if ($housekeeper4 != 0){
+	$numberofHK = 4;
+	}
 	$typeofclean = $cleansprint['typeofclean'];
 	if ($cleansprint['notes'] == ""){
 	$extranotesbool = "None";
@@ -180,6 +248,52 @@ date_default_timezone_set('UTC');
 	$start_total = strtotime($start_string);
 	$end_total = strtotime($end_string);
 	$diff = $end_total - $start_total;
+	if ($typeofclean = "service"){
+	$service = $_SESSION['service_clean'];
+	if ($numberofHK == 1){
+	$service = $service + $diff; //1 == numberofHK
+	}
+	if ($numberofHK == 2){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+		if ($numberofHK == 3){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+		if ($numberofHK == 4){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+	$_SESSION['service_clean'] = $service;
+	}
+	else if($typeofclean = "exit"){
+	$exit = $_SESSION['exit_clean'];
+	
+		if ($numberofHK == 1){
+	$exit = $exit + $diff; //1 == numberofHK
+	}
+	if ($numberofHK == 2){
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	}
+		if ($numberofHK == 3){
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	}
+		if ($numberofHK == 4){
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	$exit = $exit + $diff;
+	}
+	$_SESSION['exit_clean'] = $exit;
+	
+	}
 	
 	
 	
@@ -194,6 +308,28 @@ date_default_timezone_set('UTC');
 	}
 	}
 	?>
+	
+	<hr class="featurette-divider" style="margin: 20px;">
+	<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Clean type</th>
+                <th>Time taken</th>
+            </tr>
+        </thead>
+        <tbody>
+			<tr>
+			<td>Service</td>
+			<td><?PHP echo date('H:i',$_SESSION['service_clean']); ?></td>
+			</tr>
+			
+			<tr>
+			<td>Exit</td>
+			<td><?PHP echo date('H:i',$_SESSION['exit_clean']); ?></td>
+			</tr>
+		</tbody>
+	</table>
+		<hr class="featurette-divider" style="margin: 20px;">
 	
     </div> <!-- /container -->
 	
