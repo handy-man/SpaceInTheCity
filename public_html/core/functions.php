@@ -25,10 +25,40 @@ function curdate() {
 
 
 function getaptdetails($connect, $propertyid) {
-$property = mysqli_query($connect, "SELECT * FROM `properties` WHERE `ID` = '$propertyid' ");
+$property = mysqli_query($connect, "SELECT `apt_number`, `building` FROM `properties` WHERE `ID` = '$propertyid' ");
 $row = $property->fetch_array(MYSQLI_ASSOC);
 $details = $row['apt_number'] . " - " . $row['building'];
     return $details;
+}
+
+function getapttype($connect, $propertyid) {
+$property = mysqli_query($connect, "SELECT `type` FROM `properties` WHERE `ID` = '$propertyid' ");
+$row = $property->fetch_array(MYSQLI_ASSOC);
+$details = $row['type'];
+
+    return $details;
+}
+
+function calculate_hours($service, $numberofHK, $diff){
+if ($numberofHK == 1){
+	$service = $service + $diff; //1 == numberofHK
+	}
+	if ($numberofHK == 2){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+		if ($numberofHK == 3){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+		if ($numberofHK == 4){
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	$service = $service + $diff;
+	}
+	return $service;
 }
 
 function gethousekeepername($connect, $hkid) {

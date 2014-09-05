@@ -148,47 +148,14 @@ $_SESSION['exit_clean'] = "00:00";
 	$diff = $end_total - $start_total;
 	if ($typeofclean = "service"){
 	$service = $_SESSION['service_clean'];
-	if ($numberofHK == 1){
-	$service = $service + $diff; //1 == numberofHK
-	}
-	if ($numberofHK == 2){
-	$service = $service + $diff;
-	$service = $service + $diff;
-	}
-		if ($numberofHK == 3){
-	$service = $service + $diff;
-	$service = $service + $diff;
-	$service = $service + $diff;
-	}
-		if ($numberofHK == 4){
-	$service = $service + $diff;
-	$service = $service + $diff;
-	$service = $service + $diff;
-	$service = $service + $diff;
-	}
+		$service = calculate_hours($service, $numberofHK, $diff);
 	$_SESSION['service_clean'] = $service;
 	}
 	else if($typeofclean = "exit"){
 	$exit = $_SESSION['exit_clean'];
 	
-		if ($numberofHK == 1){
-	$exit = $exit + $diff; //1 == numberofHK
-	}
-	if ($numberofHK == 2){
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	}
-		if ($numberofHK == 3){
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	}
-		if ($numberofHK == 4){
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	}
+			$exit = calculate_hours($exit, $numberofHK, $diff);
+
 	$_SESSION['exit_clean'] = $exit;
 	
 	}
@@ -250,47 +217,14 @@ $_SESSION['exit_clean'] = "00:00";
 	$diff = $end_total - $start_total;
 	if ($typeofclean = "service"){
 	$service = $_SESSION['service_clean'];
-	if ($numberofHK == 1){
-	$service = $service + $diff; //1 == numberofHK
-	}
-	if ($numberofHK == 2){
-	$service = $service + $diff;
-	$service = $service + $diff;
-	}
-		if ($numberofHK == 3){
-	$service = $service + $diff;
-	$service = $service + $diff;
-	$service = $service + $diff;
-	}
-		if ($numberofHK == 4){
-	$service = $service + $diff;
-	$service = $service + $diff;
-	$service = $service + $diff;
-	$service = $service + $diff;
-	}
+	//inset function here! 
+	$service = calculate_hours($service, $numberofHK, $diff);
 	$_SESSION['service_clean'] = $service;
 	}
 	else if($typeofclean = "exit"){
 	$exit = $_SESSION['exit_clean'];
-	
-		if ($numberofHK == 1){
-	$exit = $exit + $diff; //1 == numberofHK
-	}
-	if ($numberofHK == 2){
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	}
-		if ($numberofHK == 3){
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	}
-		if ($numberofHK == 4){
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	$exit = $exit + $diff;
-	}
+		$exit = calculate_hours($exit, $numberofHK, $diff);
+
 	$_SESSION['exit_clean'] = $exit;
 	
 	}
