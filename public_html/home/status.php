@@ -146,12 +146,12 @@ $_SESSION['exit_clean'] = "00:00";
 	$start_total = strtotime($start_string);
 	$end_total = strtotime($end_string);
 	$diff = $end_total - $start_total;
-	if ($typeofclean = "service"){
+	if ($typeofclean == "service"){
 	$service = $_SESSION['service_clean'];
 		$service = calculate_hours($service, $numberofHK, $diff);
 	$_SESSION['service_clean'] = $service;
 	}
-	else if($typeofclean = "exit"){
+	else if($typeofclean == "exit"){
 	$exit = $_SESSION['exit_clean'];
 	
 			$exit = calculate_hours($exit, $numberofHK, $diff);
@@ -215,13 +215,13 @@ $_SESSION['exit_clean'] = "00:00";
 	$start_total = strtotime($start_string);
 	$end_total = strtotime($end_string);
 	$diff = $end_total - $start_total;
-	if ($typeofclean = "service"){
+	if ($typeofclean == "service"){
 	$service = $_SESSION['service_clean'];
 	//inset function here! 
 	$service = calculate_hours($service, $numberofHK, $diff);
 	$_SESSION['service_clean'] = $service;
 	}
-	else if($typeofclean = "exit"){
+	else if($typeofclean == "exit"){
 	$exit = $_SESSION['exit_clean'];
 		$exit = calculate_hours($exit, $numberofHK, $diff);
 
